@@ -1,0 +1,27 @@
+<div class="container">
+    <h2 class="text-center">Schedule List</h2>
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>idSchedule</th>
+                <th>Days</th>
+                <th>TimeStart</th>
+                <th>TimeEnd</th>
+                <th>Assignments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let schedule of schedules">
+                <td> {{ schedule.idSchedule }} </td>
+                <td> {{ schedule.days }} </td>
+                <td> {{ schedule.timeStart }} </td>
+                <td> {{ schedule.timeEnd }} </td>
+                <td> {{ schedule.assignments }} </td>
+                <td>
+                    <button (click) = "updateSchedule(schedule.idSchedule)" class="btn btn-info">Update</button>
+                    <button (click) = "deleteSchedule(schedule.idSchedule)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

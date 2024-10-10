@@ -1,0 +1,25 @@
+<div class="container">
+    <h2 class="text-center">Route List</h2>
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>idRoute</th>
+                <th>Code</th>
+                <th>Stations</th>
+                <th>Assignments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let route of routes">
+                <td> {{ route.idRoute }} </td>
+                <td> {{ route.code }} </td>
+                <td> {{ route.stations }} </td>
+                <td> {{ route.assignments }} </td>
+                <td>
+                    <button (click) = "updateRoute(route.idRoute)" class="btn btn-info">Update</button>
+                    <button (click) = "deleteRoute(route.idRoute)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

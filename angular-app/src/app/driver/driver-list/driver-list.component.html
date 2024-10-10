@@ -1,0 +1,29 @@
+<div class="container">
+    <h2 class="text-center">Driver List</h2>
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>idDriver</th>
+                <th>Name</th>
+                <th>Identification</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Assignments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let driver of drivers">
+                <td> {{ driver.idDriver }} </td>
+                <td> {{ driver.name }} </td>
+                <td> {{ driver.identification }} </td>
+                <td> {{ driver.phone }} </td>
+                <td> {{ driver.address }} </td>
+                <td> {{ driver.assignments }} </td>
+                <td>
+                    <button (click) = "updateDriver(driver.idDriver)" class="btn btn-info">Update</button>
+                    <button (click) = "deleteDriver(driver.idDriver)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+<div class="container">
+    <h2 class="text-center">Assignment List</h2>
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>idAssignment</th>
+                <th>idBus</th>
+                <th>idDriver</th>
+                <th>idRoute</th>
+                <th>idSchedule</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let assignment of assignments">
+                <td> {{ assignment.idAssignment }} </td>
+                <td> {{ assignment.idBus }} </td>
+                <td> {{ assignment.idDriver }} </td>
+                <td> {{ assignment.idRoute }} </td>
+                <td> {{ assignment.idSchedule }} </td>
+                <td>
+                    <button (click) = "updateAssignment(assignment.idAssignment)" class="btn btn-info">Update</button>
+                    <button (click) = "deleteAssignment(assignment.idAssignment" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

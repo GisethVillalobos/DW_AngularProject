@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusService } from '../../services/bus.service';
-import { Bus } from '../../bus.model';
+import { Bus } from '../../model/bus.model';
 
 @Component({
   selector: 'app-bus-update',

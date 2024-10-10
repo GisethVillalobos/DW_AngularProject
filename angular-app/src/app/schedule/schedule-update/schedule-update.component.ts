@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleService } from '../../services/schedule.service';
-import { Schedule } from '../../schedule.model';
+import { Schedule } from '../../model/schedule.model';
 
 @Component({
   selector: 'app-schedule-update',

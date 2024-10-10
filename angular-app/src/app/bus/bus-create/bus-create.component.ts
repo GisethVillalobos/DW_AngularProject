@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Bus } from '../../bus.model';
+import { Bus } from '../../model/bus.model';
 import { BusService } from '../../services/bus.service';
 import { Router } from '@angular/router';
+import { BusDTO } from '../../dto/bus-dto';
 
 @Component({
   selector: 'app-bus-create',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 
 export class BusCreateComponent implements OnInit {
 
+  busDTO: BusDTO = new BusDTO(null, '', '', null);
   bus: Bus = new Bus();
 
   constructor(private busService: BusService, private router: Router) { }

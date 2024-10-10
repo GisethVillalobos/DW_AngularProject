@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Bus } from '../../bus.model';
+import { Bus } from '../../model/bus.model';
 import { BusService } from '../../services/bus.service';
 import { Router } from '@angular/router';
 

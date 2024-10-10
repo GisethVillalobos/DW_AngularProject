@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentService } from '../../services/assignment.service';
-import { Assignment } from '../../assignment.model';
+import { Assignment } from '../../model/assignment.model';
+import { AssignmentDTO } from '../../dto/assignment-dto';
 
 @Component({
   selector: 'app-assignment-update',
@@ -12,6 +13,9 @@ import { Assignment } from '../../assignment.model';
 })
 
 export class AssignmentUpdateComponent implements OnInit {
+  
+  assignmentDTO: AssignmentDTO = new AssignmentDTO(null, 0, 0, 0, 0);
+
   id!: number;
   assignment: Assignment = new Assignment();
   constructor(private assignmentService: AssignmentService,

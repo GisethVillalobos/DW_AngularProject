@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Schedule } from '../../schedule.model';
+import { Schedule } from '../../model/schedule.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleService } from '../../services/schedule.service';
 

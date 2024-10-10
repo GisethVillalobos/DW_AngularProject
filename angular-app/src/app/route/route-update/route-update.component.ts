@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouteService } from '../../services/route.service';
-import { Route } from '../../route.model';
+import { Route } from '../../model/route.model';
 
 @Component({
   selector: 'app-route-update',

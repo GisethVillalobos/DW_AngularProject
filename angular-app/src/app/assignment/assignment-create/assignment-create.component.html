@@ -3,19 +3,19 @@
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="idDriver">Driver ID</label>
-            <input type="number" class="form-control" id="idDriver" [(ngModel)]="assignment.idDriver" name="idDriver">
+            <input type="number" class="form-control" id="idDriver" [(ngModel)]="assignmentDTO.idDriver" name="idDriver">
         </div>
         <div class="form-group">
             <label for="idBus">Bus ID</label>
-            <input type="number" class="form-control" id="idBus" [(ngModel)]="assignment.idBus" name="idBus">
+            <input type="number" class="form-control" id="idBus" [(ngModel)]="assignmentDTO.idBus" name="idBus">
         </div>
         <div class="form-group">
             <label for="idRoute">Route ID</label>
-            <input type="number" class="form-control" id="idRoute" [(ngModel)]="assignment.idRoute" name="idRoute">
+            <input type="number" class="form-control" id="idRoute" [(ngModel)]="assignmentDTO.idRoute" name="idRoute">
         </div>
         <div class="form-group">
             <label for="idSchedule">Schedule ID</label>
-            <input type="number" class="form-control" id="idSchedule" [(ngModel)]="assignment.idSchedule" name="idSchedule">
+            <input type="number" class="form-control" id="idSchedule" [(ngModel)]="assignmentDTO.idSchedule" name="idSchedule">
         </div>
         <button class="btn btn-success mt-2" type="submit">Submit</button>
     </form>

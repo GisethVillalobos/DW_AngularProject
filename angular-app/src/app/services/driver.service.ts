@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Driver } from '../driver.model';
+import { Driver } from '../model/driver.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

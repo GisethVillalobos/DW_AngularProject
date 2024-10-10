@@ -1,0 +1,14 @@
+<div class="container">
+    <h2 class="text-center">Create Bus</h2>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="plate">Plate</label>
+            <input type="text" class="form-control" id="plate" [(ngModel)]="bus.plate" name="plate">
+        </div>
+        <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" class="form-control" id="model" [(ngModel)]="bus.model" name="model">
+        </div>
+        <button class="btn btn-success mt-2" type="submit">Submit</button>
+    </form>
+</div>

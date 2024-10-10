@@ -1,1 +1,20 @@
-<p>assignment-details works!</p>
+<h2>Assignment Details</h2> 
+
+<hr/>
+<div *ngIf="assignment">
+  <div>
+    <label><b>Driver ID: </b></label> {{assignment.idDriver}}
+  </div>
+  <div>
+    <label><b>Bus ID: </b></label> {{assignment.idBus}}
+  </div>
+  <div>
+    <label><b>Route ID: </b></label> {{assignment.idRoute}}
+  </div>  
+  <div>
+    <label><b>Schedule ID: </b></label> {{assignment.idSchedule}}
+  </div>
+</div>
+
+<br><br>
+<button (click)="list()" class="btn btn-primary">Back to Assignment List</button><br>

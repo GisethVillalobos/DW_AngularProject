@@ -1,1 +1,14 @@
-<p>bus-details works!</p>
+<h2>Bus Details</h2> 
+
+<hr/>
+<div *ngIf="bus">
+  <div>
+    <label><b>Plate: </b></label> {{bus.plate}}
+  </div>
+  <div>
+    <label><b>Model: </b></label> {{bus.model}}
+  </div>
+</div>
+
+<br><br>
+<button (click)="list()" class="btn btn-primary">Back to Bus List</button><br>

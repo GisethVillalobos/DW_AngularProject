@@ -1,1 +1,20 @@
-<p>driver-details works!</p>
+<h2>Driver Details</h2> 
+
+<hr/>
+<div *ngIf="driver">
+  <div>
+    <label><b>Name: </b></label> {{driver.name}}
+  </div>
+  <div>
+    <label><b>Identification: </b></label> {{driver.identification}}
+  </div>
+  <div>
+    <label><b>Phone: </b></label> {{driver.phone}}
+  </div>
+  <div>
+    <label><b>Address: </b></label> {{driver.address}}
+  </div>
+</div>
+
+<br><br>
+<button (click)="list()" class="btn btn-primary">Back to Driver List</button><br>

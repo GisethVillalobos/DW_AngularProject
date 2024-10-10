@@ -1,1 +1,17 @@
-<p>schedule-details works!</p>
+<h2>Schedule Details</h2> 
+
+<hr/>
+<div *ngIf="schedule">
+  <div>
+    <label><b>Days: </b></label> {{schedule.days.join(', ')}}
+  </div>
+  <div>
+    <label><b>Time Start: </b></label> {{schedule.timeStart}}
+  </div>
+  <div>
+    <label><b>Time End: </b></label> {{schedule.timeEnd}}
+  </div>
+</div>
+
+<br><br>
+<button (click)="list()" class="btn btn-primary">Back to Schedule List</button><br>

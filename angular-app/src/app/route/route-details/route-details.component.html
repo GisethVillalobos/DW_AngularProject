@@ -1,1 +1,14 @@
-<p>route-details works!</p>
+<h2>Route Details</h2> 
+
+<hr/>
+<div *ngIf="route">
+  <div>
+    <label><b>Code: </b></label> {{route.code}}
+  </div>
+  <div>
+    <label><b>Stations: </b></label> {{route.stations.join(', ')}}
+  </div>
+</div>
+
+<br><br>
+<button (click)="list()" class="btn btn-primary">Back to Route List</button><br>

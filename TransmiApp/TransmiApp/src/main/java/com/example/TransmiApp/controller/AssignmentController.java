@@ -19,14 +19,14 @@ import com.example.TransmiApp.model.Assignment;
 import com.example.TransmiApp.service.AssignmentService;
 
 @RestController
-@RequestMapping("/api/assignment")
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/assignment")
 public class AssignmentController {
 
     @Autowired
     private AssignmentService assignmentService;
 
-    @PostMapping(value = "/create", consumes = "application/json")
+    @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Assignment createAssignment(@RequestBody Assignment assignment) {
         return assignmentService.createAssignment(assignment);

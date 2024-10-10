@@ -44,7 +44,7 @@ public class BusController {
         return busService.getBusById(idBus);
     }
 
-    @PutMapping("/update/{idBus}")
+    @PutMapping(value = "/update/{idBus}")
     @ResponseStatus(value = HttpStatus.OK)
     public Bus updateBus(@PathVariable Long idBus, @RequestBody Bus bus) {
         return busService.updateBus(idBus, bus);

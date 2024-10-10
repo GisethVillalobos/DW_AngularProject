@@ -26,7 +26,7 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = "application/json")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Assignment createAssignment(@RequestBody Assignment assignment) {
         return assignmentService.createAssignment(assignment);
@@ -44,7 +44,7 @@ public class AssignmentController {
         return assignmentService.getAssignmentById(idAssignment);
     }
 
-    @PutMapping("/update/{idAssignment}")
+    @PutMapping(value = "/update/{idAssignment}")
     @ResponseStatus(value = HttpStatus.OK)
     public Assignment updateAssignment(@PathVariable Long idAssignment, @RequestBody Assignment assignment) {
         return assignmentService.updateAssignment(idAssignment, assignment);

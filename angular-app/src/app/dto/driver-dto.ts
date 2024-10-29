@@ -1,4 +1,4 @@
-import { Assignment } from "../model/assignment.model";
+import { AssignmentDTO } from "./assignment-dto";
 
 export class DriverDTO {
     constructor(
@@ -7,6 +7,6 @@ export class DriverDTO {
         public identification: string,
         public phone: string,
         public address: string,
-        public assignments: Set<Assignment>
+        public assignments: Set<AssignmentDTO> | null
     ) {}
 }

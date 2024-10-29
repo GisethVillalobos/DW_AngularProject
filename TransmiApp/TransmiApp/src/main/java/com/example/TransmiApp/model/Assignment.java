@@ -1,18 +1,18 @@
 package com.example.TransmiApp.model;
 
-import java.util.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="assignment_table")
@@ -23,23 +23,36 @@ public class Assignment {
     private Long idAssignment;
 
     @ManyToOne
-    @JoinColumn(name = "driver_idDriver")
-    @JsonBackReference
-    private Driver driver;
-
-    @ManyToOne
-    @JoinColumn(name = "bus_idBus")
-    @JsonBackReference
+    @JoinColumn(
+        name = "bus_idBus",
+        referencedColumnName = "idBus"
+        )
+    @JsonIgnore
     private Bus bus;
 
     @ManyToOne
-    @JoinColumn(name = "route_idRoute")
-    @JsonBackReference
+    @JoinColumn(
+        name = "driver_idDriver",
+        referencedColumnName = "idDriver"
+        )
+    @JsonIgnore
+    private Driver driver;
+
+
+    @ManyToOne
+    @JoinColumn(
+        name = "route_idRoute",
+        referencedColumnName = "idRoute"
+        )
+    @JsonIgnore
     private Route route;
 
     @ManyToOne
-    @JoinColumn(name = "schedule_idSchedule")
-    @JsonBackReference
+    @JoinColumn(
+        name = "schedule_idSchedule",
+        referencedColumnName = "idSchedule"
+        )
+    @JsonIgnore
     private Schedule schedule;
 
 

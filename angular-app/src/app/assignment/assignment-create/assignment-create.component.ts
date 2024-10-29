@@ -23,7 +23,7 @@ export class AssignmentCreateComponent implements OnInit {
   }
 
   saveAssignment() {
-    this.assignmentService.createAssignment(this.assignment).subscribe({
+    this.assignmentService.createAssignment(this.assignmentDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToAssignmentList();

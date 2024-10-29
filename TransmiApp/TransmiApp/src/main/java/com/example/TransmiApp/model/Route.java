@@ -1,18 +1,21 @@
 package com.example.TransmiApp.model;
 
-import java.util.*;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="route_table")
@@ -20,19 +23,25 @@ public class Route {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idRoute")
     private Long idRoute;
 
     private String code;
     private List<String> stations;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "route")
-    private Set<Assignment> assignments;
+    private List<Assignment> assignments;
 
-    public Route(String code, List<String> stations, Set<Assignment> assignments) {
+    public Route(String code, List<String> stations, List<Assignment> assignments) {
         this.code = code;
         this.stations = stations;
         this.assignments = assignments;
+    }
+
+    public Route(String code, List<String> stations) {
+        this.code = code;
+        this.stations = stations;
     }
 
     public Long getIdRoute() {
@@ -59,11 +68,11 @@ public class Route {
         this.stations = stations;
     }
 
-    public Set<Assignment> getAssignments() {
+    public List<Assignment> getAssignments() {
         return assignments;
     }
 
-    public void setAssignments(Set<Assignment> assignments) {
+    public void setAssignments(List<Assignment> assignments) {
         this.assignments = assignments;
     }
 

@@ -23,7 +23,7 @@ export class BusCreateComponent implements OnInit {
   }
 
   saveBus() {
-    this.busService.createBus(this.bus).subscribe({
+    this.busService.createBus(this.busDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToBusList();
@@ -39,7 +39,7 @@ export class BusCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.bus);
+    console.log(this.busDTO);
     this.saveBus();
   }
 }

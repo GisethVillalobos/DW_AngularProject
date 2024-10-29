@@ -1,18 +1,20 @@
 package com.example.TransmiApp.model;
 
-import java.util.*;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import jakarta.persistence.*;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="driver_table")
@@ -21,6 +23,7 @@ public class Driver {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idDriver")
     private Long idDriver;
 
     private String name;
@@ -28,16 +31,23 @@ public class Driver {
     private String phone;
     private String address;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "driver")
-    private Set<Assignment> assignments;
+    private List<Assignment> assignments;
 
-    public Driver(String name, String identification, String phone, String address, Set<Assignment> assignments) {
+    public Driver(String name, String identification, String phone, String address, List<Assignment> assignments) {
         this.name = name;
         this.identification = identification;
         this.phone = phone;
         this.address = address;
         this.assignments = assignments;
+    }
+
+    public Driver(String name, String identification, String phone, String address) {
+        this.name = name;
+        this.identification = identification;
+        this.phone = phone;
+        this.address = address;
     }
 
     public Long getIdDriver() {
@@ -80,11 +90,11 @@ public class Driver {
         this.address = address;
     }
 
-    public Set<Assignment> getAssignments() {
+    public List<Assignment> getAssignments() {
         return assignments;
     }
 
-    public void setAssignments(Set<Assignment> assignments) {
+    public void setAssignments(List<Assignment> assignments) {
         this.assignments = assignments;
     }
     

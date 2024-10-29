@@ -1,4 +1,4 @@
-import { Assignment } from "../model/assignment.model";
+import { AssignmentDTO } from "./assignment-dto";
 
 export class ScheduleDTO {
     constructor(
@@ -6,6 +6,6 @@ export class ScheduleDTO {
         public days: Array<string>,
         public timeStart: string, //HH:mm
         public timeEnd: string, //HH:mm
-        public assignments: Set<Assignment>
+        public assignments: Set<AssignmentDTO> | null
     ) {}
 }

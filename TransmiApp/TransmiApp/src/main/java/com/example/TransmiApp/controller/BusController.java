@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class BusController {
     @Autowired
     private BusService busService;
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public Bus createBus(@RequestBody Bus bus) {
         return busService.createBus(bus);
@@ -44,7 +45,7 @@ public class BusController {
         return busService.getBusById(idBus);
     }
 
-    @PutMapping(value = "/update/{idBus}")
+    @PutMapping("/update/{idBus}")
     @ResponseStatus(value = HttpStatus.OK)
     public Bus updateBus(@PathVariable Long idBus, @RequestBody Bus bus) {
         return busService.updateBus(idBus, bus);

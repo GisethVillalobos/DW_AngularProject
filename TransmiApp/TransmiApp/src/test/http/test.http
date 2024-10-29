@@ -1,0 +1,16 @@
+PUT http://localhost:8080/api/bus/update/2
+Content-Type: application/json
+
+{
+  "plate": "XYZ987",
+  "model": "Mercedes 2017"
+}
+
+
+POST http://localhost:8080/api/bus/create
+Content-Type: application/json
+
+{
+    "plate": "XYZ987",
+    "model": "Volvo OX"
+}

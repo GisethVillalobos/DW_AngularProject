@@ -1,20 +1,22 @@
 package com.example.TransmiApp.model;
 
-import java.util.*;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import jakarta.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="schedule_table")
@@ -22,21 +24,28 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idSchedule")
     private Long idSchedule;
 
     private List<String> days;
     private Time timeStart;
     private Time timeEnd;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "schedule")
-    private Set<Assignment> assignments;
+    private List<Assignment> assignments;
 
-    public Schedule(List<String> days, Time timeStart, Time timeEnd, Set<Assignment> assignments) {
+    public Schedule(List<String> days, Time timeStart, Time timeEnd, List<Assignment> assignments) {
         this.days = days;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.assignments = assignments;
+    }
+
+    public Schedule(List<String> days, Time timeStart, Time timeEnd) {
+        this.days = days;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
     }
 
     public Long getIdSchedule() {
@@ -71,11 +80,11 @@ public class Schedule {
         this.timeEnd = timeEnd;
     }
 
-    public Set<Assignment> getAssignments() {
+    public List<Assignment> getAssignments() {
         return assignments;
     }
 
-    public void setAssignments(Set<Assignment> assignments) {
+    public void setAssignments(List<Assignment> assignments) {
         this.assignments = assignments;
     }
 

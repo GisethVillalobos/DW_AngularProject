@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.TransmiApp.conversion.ScheduleDTOConverter;
+import com.example.TransmiApp.dto.ScheduleDTO;
 import com.example.TransmiApp.model.Schedule;
 import com.example.TransmiApp.repository.ScheduleRepository;
 import com.example.TransmiApp.service.ScheduleService;
@@ -15,23 +17,30 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     private ScheduleRepository scheduleRepository;
 
+    @Autowired
+    private ScheduleDTOConverter scheduleDTOConverter;
+
     @Override
     public List<Schedule> getAllSchedules() {
         return (List<Schedule>) scheduleRepository.findAll();
     }
 
     @Override
-    public Schedule getScheduleById(Long idSchedule) {
-        return scheduleRepository.findById(idSchedule).orElse(null);
+    public ScheduleDTO getScheduleById(Long idSchedule) {
+        return scheduleDTOConverter.entityToDTO(scheduleRepository.findById(idSchedule).orElseThrow());
     }
 
     @Override
-    public Schedule createSchedule(Schedule schedule) {
-        return scheduleRepository.save(schedule);
+    public ScheduleDTO createSchedule(ScheduleDTO scheduleDTO) {
+        Schedule schedule = scheduleDTOConverter.DTOToEntity(scheduleDTO);
+        return scheduleDTOConverter.entityToDTO(scheduleRepository.save(schedule));
     }
 
     @Override
-    public Schedule updateSchedule(Long idSchedule, Schedule schedule) {
+    public ScheduleDTO updateSchedule(Long idSchedule, ScheduleDTO scheduleDTO) {
+
+        Schedule schedule = scheduleDTOConverter.DTOToEntity(scheduleDTO);
+
         Schedule existingSchedule = scheduleRepository.findById(idSchedule).orElseThrow();
 
         existingSchedule.setDays(schedule.getDays());
@@ -39,7 +48,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         existingSchedule.setTimeEnd(schedule.getTimeEnd());
         existingSchedule.setAssignments(schedule.getAssignments());
         
-        return scheduleRepository.save(existingSchedule);
+        return scheduleDTOConverter.entityToDTO(scheduleRepository.save(existingSchedule));
     }
 
     @Override

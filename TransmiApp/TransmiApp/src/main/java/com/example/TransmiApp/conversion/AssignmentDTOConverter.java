@@ -7,6 +7,7 @@ import com.example.TransmiApp.model.Assignment;
 import com.example.TransmiApp.model.Bus;
 import com.example.TransmiApp.model.Driver;
 import com.example.TransmiApp.model.Route;
+import com.example.TransmiApp.model.Schedule;
 
 @Component
 public class AssignmentDTOConverter {
@@ -30,4 +31,3 @@ public class AssignmentDTOConverter {
         );
     }
 }
-

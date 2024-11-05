@@ -2,12 +2,13 @@ package com.example.TransmiApp.service;
 
 import java.util.List;
 
+import com.example.TransmiApp.dto.RouteDTO;
 import com.example.TransmiApp.model.Route;
 
 public interface RouteService {
     List<Route> getAllRoutes();
-    Route getRouteById(Long idRoute);
-    Route createRoute(Route route);
-    Route updateRoute(Long idRoute, Route route);
+    RouteDTO getRouteById(Long idRoute);
+    RouteDTO createRoute(RouteDTO routeDTO);
+    RouteDTO updateRoute(Long idRoute, RouteDTO routeDTO);
     void deleteRoute(Long idRoute);
 }

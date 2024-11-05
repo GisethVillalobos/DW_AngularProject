@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.TransmiApp.dto.DriverDTO;
 import com.example.TransmiApp.model.Driver;
 import com.example.TransmiApp.service.DriverService;
 
@@ -28,8 +29,8 @@ public class DriverController {
 
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Driver createDriver(@RequestBody Driver driver) {
-        return driverService.createDriver(driver);
+    public DriverDTO createDriver(@RequestBody DriverDTO driverDTO) {
+        return driverService.createDriver(driverDTO);
     }
 
     @GetMapping("/all")
@@ -40,14 +41,14 @@ public class DriverController {
 
     @GetMapping("/read/{idDriver}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Driver findById(@PathVariable Long idDriver) {
+    public DriverDTO findById(@PathVariable Long idDriver) {
         return driverService.getDriverById(idDriver);
     }
 
     @PutMapping("/update/{idDriver}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Driver updateDriver(@PathVariable Long idDriver, @RequestBody Driver driver) {
-        return driverService.updateDriver(idDriver, driver);
+    public DriverDTO updateDriver(@PathVariable Long idDriver, @RequestBody DriverDTO driverDTO) {
+        return driverService.updateDriver(idDriver, driverDTO);
     }
 
     @DeleteMapping("/delete/{idDriver}")

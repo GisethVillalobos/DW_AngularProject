@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.TransmiApp.dto.AssignmentDTO;
 import com.example.TransmiApp.model.Assignment;
+import com.example.TransmiApp.model.Bus;
+import com.example.TransmiApp.model.Driver;
+import com.example.TransmiApp.model.Route;
+import com.example.TransmiApp.model.Schedule;
 import com.example.TransmiApp.service.AssignmentService;
 
 @RestController
@@ -28,8 +34,13 @@ public class AssignmentController {
 
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Assignment createAssignment(@RequestBody Assignment assignment) {
-        return assignmentService.createAssignment(assignment);
+    public AssignmentDTO createAssignment(@RequestBody AssignmentDTO assignmentDTO, 
+                                          @RequestParam Bus bus, 
+                                          @RequestParam Driver driver, 
+                                          @RequestParam Route route, 
+                                          @RequestParam Schedule schedule) {
+        // Pass the correct parameters to createAssignment
+        return assignmentService.createAssignment(assignmentDTO, bus, driver, route, schedule);
     }
 
     @GetMapping("/all")
@@ -40,14 +51,19 @@ public class AssignmentController {
 
     @GetMapping("/read/{idAssignment}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Assignment findById(@PathVariable Long idAssignment) {
+    public AssignmentDTO findById(@PathVariable Long idAssignment) {
         return assignmentService.getAssignmentById(idAssignment);
     }
 
     @PutMapping(value = "/update/{idAssignment}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Assignment updateAssignment(@PathVariable Long idAssignment, @RequestBody Assignment assignment) {
-        return assignmentService.updateAssignment(idAssignment, assignment);
+    public AssignmentDTO updateAssignment(@PathVariable Long idAssignment, 
+                                          @RequestBody AssignmentDTO assignmentDTO, 
+                                          @RequestParam Bus bus, 
+                                          @RequestParam Driver driver, 
+                                          @RequestParam Route route, 
+                                          @RequestParam Schedule schedule) {
+        return assignmentService.updateAssignment(idAssignment, assignmentDTO, bus, driver, route, schedule);
     }
 
     @DeleteMapping("/delete/{idAssignment}")
@@ -55,5 +71,4 @@ public class AssignmentController {
     public void deleteAssignment(@PathVariable Long idAssignment) {
         assignmentService.deleteAssignment(idAssignment);
     }
-
 }

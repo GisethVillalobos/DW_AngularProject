@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.TransmiApp.dto.RouteDTO;
 import com.example.TransmiApp.model.Route;
 import com.example.TransmiApp.service.RouteService;
 
@@ -28,8 +29,8 @@ public class RouteController {
 
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Route createRoute(@RequestBody Route route) {
-        return routeService.createRoute(route);
+    public RouteDTO createRoute(@RequestBody RouteDTO routeDTO) {
+        return routeService.createRoute(routeDTO);
     }
 
     @GetMapping("/all")
@@ -40,14 +41,14 @@ public class RouteController {
 
     @GetMapping("/read/{idRoute}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Route findById(@PathVariable Long idRoute) {
+    public RouteDTO findById(@PathVariable Long idRoute) {
         return routeService.getRouteById(idRoute);
     }
 
     @PutMapping("/update/{idRoute}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Route updateRoute(@PathVariable Long idRoute, @RequestBody Route route) {
-        return routeService.updateRoute(idRoute, route);
+    public RouteDTO updateRoute(@PathVariable Long idRoute, @RequestBody RouteDTO routeDTO) {
+        return routeService.updateRoute(idRoute, routeDTO);
     }
 
     @DeleteMapping("/delete/{idRoute}")

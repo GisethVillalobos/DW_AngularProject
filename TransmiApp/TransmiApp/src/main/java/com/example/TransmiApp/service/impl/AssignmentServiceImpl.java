@@ -5,7 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.TransmiApp.conversion.AssignmentDTOConverter;
+import com.example.TransmiApp.dto.AssignmentDTO;
 import com.example.TransmiApp.model.Assignment;
+import com.example.TransmiApp.model.Bus;
+import com.example.TransmiApp.model.Driver;
+import com.example.TransmiApp.model.Route;
+import com.example.TransmiApp.model.Schedule;
 import com.example.TransmiApp.repository.AssignmentRepository;
 import com.example.TransmiApp.service.AssignmentService;
 
@@ -14,7 +20,9 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Autowired
     private AssignmentRepository assignmentRepository;
-    
+
+    @Autowired
+    private AssignmentDTOConverter assignmentDTOConverter;
 
     @Override
     public List<Assignment> getAllAssignments() {
@@ -22,26 +30,30 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public Assignment getAssignmentById(Long idAssignment) {
-        return assignmentRepository.findById(idAssignment).orElse(null);
+    public AssignmentDTO getAssignmentById(Long idAssignment) {
+        Assignment assignment = assignmentRepository.findById(idAssignment).orElseThrow();
+        return assignmentDTOConverter.entityToDTO(assignment);
     }
 
     @Override
-    public Assignment createAssignment(Assignment assignment) {
-        return assignmentRepository.save(assignment);
+    public AssignmentDTO createAssignment(AssignmentDTO assignmentDTO, Bus bus, Driver driver, Route route, Schedule schedule) {
+        Assignment assignment = assignmentDTOConverter.DTOToEntity(assignmentDTO, bus, driver, route, schedule);
+        return assignmentDTOConverter.entityToDTO(assignmentRepository.save(assignment));
     }
 
     @Override
-    public Assignment updateAssignment(Long idAssignment, Assignment assignment) {
+    public AssignmentDTO updateAssignment(Long idAssignment, AssignmentDTO assignmentDTO, Bus bus, Driver driver, Route route, Schedule schedule) {
+
         Assignment existingAssignment = assignmentRepository.findById(idAssignment).orElseThrow();
-
-        existingAssignment.setBus(assignment.getBus());
-        existingAssignment.setDriver(assignment.getDriver());
-        existingAssignment.setRoute(assignment.getRoute());
-        existingAssignment.setSchedule(assignment.getSchedule());
-        
-        return assignmentRepository.save(existingAssignment);
+        Assignment updatedAssignment = assignmentDTOConverter.DTOToEntity(assignmentDTO, bus, driver, route, schedule);
+        existingAssignment.setBus(updatedAssignment.getBus());
+        existingAssignment.setDriver(updatedAssignment.getDriver());
+        existingAssignment.setRoute(updatedAssignment.getRoute());
+        existingAssignment.setSchedule(updatedAssignment.getSchedule());
+    
+        return assignmentDTOConverter.entityToDTO(assignmentRepository.save(existingAssignment));
     }
+    
 
     @Override
     public void deleteAssignment(Long idAssignment) {

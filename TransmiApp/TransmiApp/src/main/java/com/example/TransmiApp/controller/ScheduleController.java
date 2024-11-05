@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.TransmiApp.dto.ScheduleDTO;
 import com.example.TransmiApp.model.Schedule;
 import com.example.TransmiApp.service.ScheduleService;
 
@@ -28,8 +29,8 @@ public class ScheduleController {
 
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Schedule createSchedule(@RequestBody Schedule schedule) {
-        return scheduleService.createSchedule(schedule);
+    public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
+        return scheduleService.createSchedule(scheduleDTO);
     }
 
     @GetMapping("/all")
@@ -40,14 +41,14 @@ public class ScheduleController {
 
     @GetMapping("/read/{idSchedule}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Schedule findById(@PathVariable Long idSchedule) {
+    public ScheduleDTO findById(@PathVariable Long idSchedule) {
         return scheduleService.getScheduleById(idSchedule);
     }
 
     @PutMapping("/update/{idSchedule}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Schedule updateSchedule(@PathVariable Long idSchedule, @RequestBody Schedule schedule) {
-        return scheduleService.updateSchedule(idSchedule, schedule);
+    public ScheduleDTO updateSchedule(@PathVariable Long idSchedule, @RequestBody ScheduleDTO scheduleDTO) {
+        return scheduleService.updateSchedule(idSchedule, scheduleDTO);
     }
 
     @DeleteMapping("/delete/{idSchedule}")

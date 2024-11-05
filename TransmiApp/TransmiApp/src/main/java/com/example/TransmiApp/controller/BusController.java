@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.TransmiApp.dto.BusDTO;
 import com.example.TransmiApp.model.Bus;
 import com.example.TransmiApp.service.BusService;
 
@@ -29,8 +30,8 @@ public class BusController {
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Bus createBus(@RequestBody Bus bus) {
-        return busService.createBus(bus);
+    public BusDTO createBus(@RequestBody BusDTO busDTO) {
+        return busService.createBus(busDTO);
     }
 
     @GetMapping("/all")
@@ -41,14 +42,14 @@ public class BusController {
 
     @GetMapping("/read/{idBus}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Bus findById(@PathVariable Long idBus) {
+    public BusDTO findById(@PathVariable Long idBus) {
         return busService.getBusById(idBus);
     }
 
     @PutMapping("/update/{idBus}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Bus updateBus(@PathVariable Long idBus, @RequestBody Bus bus) {
-        return busService.updateBus(idBus, bus);
+    public BusDTO updateBus(@PathVariable Long idBus, @RequestBody BusDTO busDTO) {
+        return busService.updateBus(idBus, busDTO);
     }
 
     @DeleteMapping("/delete/{idBus}")

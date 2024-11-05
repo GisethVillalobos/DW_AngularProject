@@ -1,3 +1,23 @@
+// Get all entities
+
+GET http://localhost:8080/api/assignment/all
+
+###
+GET http://localhost:8080/api/bus/all
+
+###
+GET http://localhost:8080/api/driver/all
+
+###
+GET http://localhost:8080/api/route/all
+
+###
+GET http://localhost:8080/api/schedule/all
+
+
+// Updating some entities
+
+###
 PUT http://localhost:8080/api/bus/update/2
 Content-Type: application/json
 
@@ -12,5 +32,35 @@ Content-Type: application/json
 
 {
     "plate": "XYZ987",
-    "model": "Volvo OX"
+    "model": "Volvo OZ"
 }
+
+### 
+POST http://localhost:8080/api/route/create
+Content-Type: application/json
+
+{
+  "code": "R001",
+  "stations": [
+    "Station A",
+    "Station B",
+    "Station C"
+  ]
+}
+
+// Deleting some entities
+
+###
+DELETE http://localhost:8080/api/assignment/delete/1
+
+###
+DELETE http://localhost:8080/api/bus/delete/1 
+
+###
+DELETE http://localhost:8080/api/driver/delete/1
+
+###
+DELETE http://localhost:8080/api/route/delete/2
+
+###
+DELETE http://localhost:8080/api/schedule/delete/1

@@ -14,17 +14,7 @@ GET http://localhost:8080/api/route/all
 ###
 GET http://localhost:8080/api/schedule/all
 
-
-// Updating some entities
-
-###
-PUT http://localhost:8080/api/bus/update/2
-Content-Type: application/json
-
-{
-  "plate": "XYZ987",
-  "model": "Mercedes 2017"
-}
+// Creating some entities
 
 ###
 POST http://localhost:8080/api/bus/create
@@ -48,19 +38,40 @@ Content-Type: application/json
   ]
 }
 
+
+// Updating some entities
+
+###
+PUT http://localhost:8080/api/bus/update/1
+Content-Type: application/json
+
+{
+  "plate": "XYZ987",
+  "model": "Mercedes 2017"
+}
+
+###
+PUT http://localhost:8080/api/route/update/1
+Content-Type: application/json
+
+{
+  "code": "R0001",
+  "stations": ["Lunes", "Martes"]
+}
+
 // Deleting some entities
 
 ###
-DELETE http://localhost:8080/api/assignment/delete/1
+DELETE http://localhost:8080/api/assignment/delete/3
 
 ###
-DELETE http://localhost:8080/api/bus/delete/1 
+DELETE http://localhost:8080/api/bus/delete/20 
 
 ###
-DELETE http://localhost:8080/api/driver/delete/1
+DELETE http://localhost:8080/api/driver/delete/20
 
 ###
-DELETE http://localhost:8080/api/route/delete/2
+DELETE http://localhost:8080/api/route/delete/20
 
 ###
-DELETE http://localhost:8080/api/schedule/delete/1
+DELETE http://localhost:8080/api/schedule/delete/2

@@ -1,13 +1,17 @@
 package com.example.TransmiApp.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.TransmiApp.conversion.RouteDTOConverter;
 import com.example.TransmiApp.dto.RouteDTO;
+import com.example.TransmiApp.model.Assignment;
 import com.example.TransmiApp.model.Route;
+import com.example.TransmiApp.repository.AssignmentRepository;
 import com.example.TransmiApp.repository.RouteRepository;
 import com.example.TransmiApp.service.RouteService;
 
@@ -16,6 +20,9 @@ public class RouteServiceImpl implements RouteService {
 
     @Autowired
     private RouteRepository routeRepository;
+
+    @Autowired
+    private AssignmentRepository assignmentRepository;
 
     @Autowired
     private RouteDTOConverter routeDTOConverter;
@@ -50,9 +57,27 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void deleteRoute(Long idRoute) {
-        if (routeRepository.existsById(idRoute)) {
+    @Transactional
+        public void deleteRoute(Long idRoute) {
+
+        boolean hasBusAssigned = assignmentRepository.existsByRouteIdRouteAndBusNotNull(idRoute);
+        if (hasBusAssigned) {
+            throw new IllegalArgumentException("No es posible eliminar esta ruta. Tiene un bus asignado.");
+        } else{
+
+            Route route = routeRepository.findById(idRoute).orElseThrow(() -> new NoSuchElementException("Route not found"));
+
+            // Setting route null for all assignments
+            List<Assignment> assignments = assignmentRepository.findByRoute(route);
+
+            for (Assignment assignment : assignments) {
+                if(assignment.getRoute().getIdRoute().equals(idRoute)) {
+                    assignment.setRoute(null);
+                    assignmentRepository.save(assignment);
+                }
+            } 
             routeRepository.deleteById(idRoute);
-        }
+        } 
+        
     }
 }

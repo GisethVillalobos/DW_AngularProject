@@ -1,13 +1,17 @@
 package com.example.TransmiApp.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.TransmiApp.conversion.DriverDTOConverter;
 import com.example.TransmiApp.dto.DriverDTO;
+import com.example.TransmiApp.model.Assignment;
 import com.example.TransmiApp.model.Driver;
+import com.example.TransmiApp.repository.AssignmentRepository;
 import com.example.TransmiApp.repository.DriverRepository;
 import com.example.TransmiApp.service.DriverService;
 
@@ -16,6 +20,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private DriverRepository driverRepository;
+
+    @Autowired
+    private AssignmentRepository assignmentRepository;
 
     @Autowired
     private DriverDTOConverter driverDTOConverter;
@@ -52,9 +59,20 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     public void deleteDriver(Long idDriver) {
-        if (driverRepository.existsById(idDriver)) {
-            driverRepository.deleteById(idDriver);
-        }
+
+        Driver driver = driverRepository.findById(idDriver).orElseThrow(() -> new NoSuchElementException("Driver not found"));
+
+        // Setting driver null for all assignments
+        List<Assignment> assignments = assignmentRepository.findByDriver(driver);
+
+        for (Assignment assignment : assignments) {
+            if(assignment.getDriver().getIdDriver().equals(idDriver)) {
+                assignment.setDriver(null);
+                assignmentRepository.save(assignment);
+            }
+        } 
+        driverRepository.deleteById(idDriver);
     }
 }

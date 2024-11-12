@@ -7,7 +7,7 @@
                 <th>Days</th>
                 <th>TimeStart</th>
                 <th>TimeEnd</th>
-                <th>Assignments</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +16,6 @@
                 <td> {{ schedule.days }} </td>
                 <td> {{ schedule.timeStart }} </td>
                 <td> {{ schedule.timeEnd }} </td>
-                <td> {{ schedule.assignments }} </td>
                 <td>
                     <button (click) = "updateSchedule(schedule.idSchedule)" class="btn btn-info">Update</button>
                     <button (click) = "deleteSchedule(schedule.idSchedule)" class="btn btn-danger">Delete</button>

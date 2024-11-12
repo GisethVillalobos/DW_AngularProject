@@ -1,35 +1,43 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Schedule } from '../model/schedule.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { ScheduleDTO } from '../dto/schedule-dto';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class ScheduleService {
   
   private basUrl = "http://localhost:8080/api/schedule"
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+    })
+  };
   
   constructor(private httpClient: HttpClient) {}
   
-  getScheduleList(): Observable<Schedule[]> {
-    return this.httpClient.get<Schedule[]>(`${this.basUrl}`);
+  getScheduleList(): Observable<ScheduleDTO[]> {
+    return this.httpClient.get<ScheduleDTO[]>(`${this.basUrl}/all`);
   }
 
-  createSchedule(schedule: Schedule): Observable<Object> {
-    return this.httpClient.post(`${this.basUrl}`, schedule);
+  createSchedule(scheduleDTO: ScheduleDTO): Observable<Object> {
+    return this.httpClient.post(`${this.basUrl}/create`, scheduleDTO);
   }
 
-  getScheduleById(idSchedule: number): Observable<Schedule>{
-    return this.httpClient.get<Schedule>(`${this.basUrl}/${idSchedule}`);
+  getScheduleById(idSchedule: number): Observable<ScheduleDTO>{
+    return this.httpClient.get<ScheduleDTO>(`${this.basUrl}/read/${idSchedule}`);
   }
 
-  updateSchedule(idSchedule:number, schedule: Schedule): Observable<Object>{
-    return this.httpClient.put(`${this.basUrl}/${idSchedule}`, schedule);
+  updateSchedule(idSchedule: number, scheduleDTO: ScheduleDTO): Observable<Object>{
+    return this.httpClient.put(`${this.basUrl}/update/${idSchedule}`, scheduleDTO);
   }
 
-  deleteSchedule(idSchedule:number): Observable<Object>{
-    return this.httpClient.delete(`${this.basUrl}/${idSchedule}`);
+  deleteSchedule(idSchedule: number): Observable<Object>{
+    return this.httpClient.delete(`${this.basUrl}/delete/${idSchedule}`);
   }
   
 }

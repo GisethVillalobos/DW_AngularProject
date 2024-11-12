@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Driver } from '../../model/driver.model';
 import { DriverService } from '../../services/driver.service';
 import { Router } from '@angular/router';
+import { DriverDTO } from '../../dto/driver-dto';
 
 @Component({
   selector: 'app-driver-create',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 
 export class DriverCreateComponent implements OnInit {
 
-  driver: Driver = new Driver();
+  driverDTO: DriverDTO = new DriverDTO(null, "", "", "", "");
 
   constructor(private driverService: DriverService, private router: Router) { }
 
@@ -21,7 +21,7 @@ export class DriverCreateComponent implements OnInit {
   }
 
   saveDriver() {
-    this.driverService.createDriver(this.driver).subscribe({
+    this.driverService.createDriver(this.driverDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToDriverList();
@@ -37,7 +37,7 @@ export class DriverCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.driver);
+    console.log(this.driverDTO);
     this.saveDriver();
   }
 }

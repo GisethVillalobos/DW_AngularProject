@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Assignment } from '../../model/assignment.model';
-import { AssignmentService } from '../../services/assignment.service';
 import { Router } from '@angular/router';
 import { AssignmentDTO } from '../../dto/assignment-dto';
+import { AssignmentService } from '../../services/assignment.service';
 
 @Component({
   selector: 'app-assignment-create',
@@ -15,7 +14,6 @@ import { AssignmentDTO } from '../../dto/assignment-dto';
 export class AssignmentCreateComponent implements OnInit {
 
   assignmentDTO: AssignmentDTO = new AssignmentDTO(null, 0, 0, 0, 0);
-  assignment: Assignment = new Assignment();
 
   constructor(private assignmentService: AssignmentService, private router: Router) { }
 
@@ -39,7 +37,7 @@ export class AssignmentCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.assignment);
+    console.log(this.assignmentDTO);
     this.saveAssignment();
   }
 }

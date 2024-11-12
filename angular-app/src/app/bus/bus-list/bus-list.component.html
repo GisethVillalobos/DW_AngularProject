@@ -6,7 +6,6 @@
                 <th>idBus</th>
                 <th>Plate</th>
                 <th>Model</th>
-                <th>Assignments</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -15,7 +14,6 @@
                 <td> {{ bus.idBus }} </td>
                 <td> {{ bus.plate }} </td>
                 <td> {{ bus.model }} </td>
-                <td> {{ bus.assignments }} </td>
                 <td>
                     <button (click) = "updateBus(bus.idBus)" class="btn btn-info">Update</button>
                     <button (click) = "deleteBus(bus.idBus)" class="btn btn-danger">Delete</button>

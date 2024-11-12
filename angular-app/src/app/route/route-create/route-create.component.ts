@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route } from '../../model/route.model';
 import { RouteService } from '../../services/route.service';
 import { Router } from '@angular/router';
+import { RouteDTO } from '../../dto/route-dto';
 
 @Component({
   selector: 'app-route-create',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 
 export class RouteCreateComponent implements OnInit {
 
-  route: Route = new Route();
+  routeDTO: RouteDTO = new RouteDTO(null, "", ["", "", ""]);
 
   constructor(private routeService: RouteService, private router: Router) { }
 
@@ -21,7 +22,7 @@ export class RouteCreateComponent implements OnInit {
   }
 
   saveRoute() {
-    this.routeService.createRoute(this.route).subscribe({
+    this.routeService.createRoute(this.routeDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToRouteList();
@@ -37,7 +38,7 @@ export class RouteCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.route);
+    console.log(this.routeDTO);
     this.saveRoute();
   }
 }

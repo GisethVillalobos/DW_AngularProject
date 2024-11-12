@@ -2,18 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Schedule } from '../../model/schedule.model';
 import { ScheduleService } from '../../services/schedule.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ScheduleDTO } from '../../dto/schedule-dto';
 
 @Component({
   selector: 'app-schedule-create',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './schedule-create.component.html',
   styleUrl: './schedule-create.component.css'
 })
 
 export class ScheduleCreateComponent implements OnInit {
 
-  schedule: Schedule = new Schedule();
+  scheduleDTO: ScheduleDTO = new ScheduleDTO(null, ["", "", ""], "", "");
 
   constructor(private scheduleService: ScheduleService, private router: Router) { }
 
@@ -21,7 +25,7 @@ export class ScheduleCreateComponent implements OnInit {
   }
 
   saveSchedule() {
-    this.scheduleService.createSchedule(this.schedule).subscribe({
+    this.scheduleService.createSchedule(this.scheduleDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToScheduleList();
@@ -37,7 +41,7 @@ export class ScheduleCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.schedule);
+    console.log(this.scheduleDTO);
     this.saveSchedule();
   }
 }

@@ -6,7 +6,7 @@
                 <th>idRoute</th>
                 <th>Code</th>
                 <th>Stations</th>
-                <th>Assignments</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,6 @@
                 <td> {{ route.idRoute }} </td>
                 <td> {{ route.code }} </td>
                 <td> {{ route.stations }} </td>
-                <td> {{ route.assignments }} </td>
                 <td>
                     <button (click) = "updateRoute(route.idRoute)" class="btn btn-info">Update</button>
                     <button (click) = "deleteRoute(route.idRoute)" class="btn btn-danger">Delete</button>

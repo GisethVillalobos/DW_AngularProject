@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Driver } from '../model/driver.model';
+import { DriverDTO } from '../dto/driver-dto';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,27 +9,33 @@ import { HttpClient } from '@angular/common/http';
 export class DriverService {
   
   private basUrl = "http://localhost:8080/api/driver"
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+    })
+  };
   
   constructor(private httpClient: HttpClient) {}
   
-  getDriverList(): Observable<Driver[]> {
-    return this.httpClient.get<Driver[]>(`${this.basUrl}`);
+  getDriverList(): Observable<DriverDTO[]> {
+    return this.httpClient.get<DriverDTO[]>(`${this.basUrl}/all`);
   }
 
-  createDriver(driver: Driver): Observable<Object> {
-    return this.httpClient.post(`${this.basUrl}`, driver);
+  createDriver(driverDTO: DriverDTO): Observable<Object> {
+    return this.httpClient.post(`${this.basUrl}/create/`, driverDTO);
   }
 
-  getDriverById(idDriver: number): Observable<Driver>{
-    return this.httpClient.get<Driver>(`${this.basUrl}/${idDriver}`);
+  getDriverById(idDriver: number): Observable<DriverDTO>{
+    return this.httpClient.get<DriverDTO>(`${this.basUrl}/read/${idDriver}`);
   }
 
-  updateDriver(idDriver:number, driver: Driver): Observable<Object>{
-    return this.httpClient.put(`${this.basUrl}/${idDriver}`, driver);
+  updateDriver(idDriver:number, driverDTO: DriverDTO): Observable<Object>{
+    return this.httpClient.put(`${this.basUrl}/update/${idDriver}`, driverDTO);
   }
 
-  deleteDriver(idDriver:number): Observable<Object>{
-    return this.httpClient.delete(`${this.basUrl}/${idDriver}`);
+  deleteDriver(idDriver: number): Observable<Object>{
+    return this.httpClient.delete(`${this.basUrl}/delete/${idDriver}`);
   }
   
 }

@@ -1,15 +1,15 @@
 <h2>Schedule Details</h2> 
 
 <hr/>
-<div *ngIf="schedule">
+<div *ngIf="scheduleDTO">
   <div>
-    <label><b>Days: </b></label> {{schedule.days.join(', ')}}
+    <label><b>Days: </b></label> {{scheduleDTO.days.join(', ')}}
   </div>
   <div>
-    <label><b>Time Start: </b></label> {{schedule.timeStart}}
+    <label><b>Time Start: </b></label> {{scheduleDTO.timeStart}}
   </div>
   <div>
-    <label><b>Time End: </b></label> {{schedule.timeEnd}}
+    <label><b>Time End: </b></label> {{scheduleDTO.timeEnd}}
   </div>
 </div>
 

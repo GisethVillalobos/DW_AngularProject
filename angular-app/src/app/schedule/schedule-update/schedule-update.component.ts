@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ScheduleDTO } from '../../dto/schedule-dto';
 import { ScheduleService } from '../../services/schedule.service';
-import { Schedule } from '../../model/schedule.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule-update',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './schedule-update.component.html',
   styleUrl: './schedule-update.component.css'
 })
 
 export class ScheduleUpdateComponent implements OnInit {
   id!: number;
-  schedule: Schedule = new Schedule();
+
+  scheduleDTO: ScheduleDTO = new ScheduleDTO(0, ["", "", ""], "", "");
 
   constructor(private scheduleService: ScheduleService, private route: ActivatedRoute, private router: Router) { }
 
@@ -21,7 +25,7 @@ export class ScheduleUpdateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.scheduleService.getScheduleById(this.id).subscribe({
       next: (data) => {
-        this.schedule = data;
+        this.scheduleDTO = data;
       },
       error: (e) => {
         console.log(e);
@@ -34,7 +38,7 @@ export class ScheduleUpdateComponent implements OnInit {
   }
 
   updateSchedule() {
-    this.scheduleService.updateSchedule(this.id, this.schedule).subscribe({
+    this.scheduleService.updateSchedule(this.id, this.scheduleDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToScheduleList();
@@ -50,7 +54,7 @@ export class ScheduleUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.schedule);
+    console.log(this.scheduleDTO);
     this.updateSchedule();
   }
 }

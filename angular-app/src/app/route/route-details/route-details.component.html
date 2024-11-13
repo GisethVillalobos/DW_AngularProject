@@ -1,12 +1,12 @@
 <h2>Route Details</h2> 
 
 <hr/>
-<div *ngIf="route">
+<div *ngIf="routeDTO">
   <div>
-    <label><b>Code: </b></label> {{route.code}}
+    <label><b>Code: </b></label> {{routeDTO.code}}
   </div>
   <div>
-    <label><b>Stations: </b></label> {{route.stations.join(', ')}}
+    <label><b>Stations: </b></label> {{routeDTO.stations.join(', ')}}
   </div>
 </div>
 

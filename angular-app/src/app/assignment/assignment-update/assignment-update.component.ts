@@ -1,30 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentService } from '../../services/assignment.service';
-import { Assignment } from '../../model/assignment.model';
 import { AssignmentDTO } from '../../dto/assignment-dto';
+import { AssignmentService } from '../../services/assignment.service';
 
 @Component({
   selector: 'app-assignment-update',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './assignment-update.component.html',
   styleUrl: './assignment-update.component.css'
 })
 
 export class AssignmentUpdateComponent implements OnInit {
   
-  assignmentDTO: AssignmentDTO = new AssignmentDTO(null, 0, 0, 0, 0);
-
   id!: number;
-  assignment: Assignment = new Assignment();
-  constructor(private assignmentService: AssignmentService,
-    private route: ActivatedRoute, private router: Router) { }
+
+  assignmentDTO: AssignmentDTO = new AssignmentDTO(0, 0, 0, 0, 0);
+
+  constructor(private assignmentService: AssignmentService, private route: ActivatedRoute, private router: Router) { }
+
   private getAssignmentById() {
     this.id = this.route.snapshot.params['id'];
     this.assignmentService.getAssignmentById(this.id).subscribe({
       next: (data) => {
-        this.assignment = data;
+        this.assignmentDTO = data;
       },
       error: (e) => {
         console.log(e);
@@ -35,7 +37,7 @@ export class AssignmentUpdateComponent implements OnInit {
     this.getAssignmentById();
   }
   updateAssignment() {
-    this.assignmentService.updateAssignment(this.id, this.assignment).subscribe({
+    this.assignmentService.updateAssignment(this.id, this.assignmentDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToAssignmentList();
@@ -49,7 +51,7 @@ export class AssignmentUpdateComponent implements OnInit {
     this.router.navigate(['/assignments']);
   }
   onSubmit() {
-    console.log(this.assignment);
+    console.log(this.assignmentDTO);
     this.updateAssignment();
   }
 }

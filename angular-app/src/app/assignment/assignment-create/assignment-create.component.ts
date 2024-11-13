@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssignmentDTO } from '../../dto/assignment-dto';
 import { AssignmentService } from '../../services/assignment.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-assignment-create',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './assignment-create.component.html',
   styleUrl: './assignment-create.component.css'
 })
 
 export class AssignmentCreateComponent implements OnInit {
 
-  assignmentDTO: AssignmentDTO = new AssignmentDTO(null, 0, 0, 0, 0);
+  assignmentDTO: AssignmentDTO = new AssignmentDTO(0, 0, 0, 0, 0);
 
   constructor(private assignmentService: AssignmentService, private router: Router) { }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Schedule } from '../../model/schedule.model';
-import { ScheduleService } from '../../services/schedule.service';
 import { Router } from '@angular/router';
+import { ScheduleDTO } from '../../dto/schedule-dto';
+import { ScheduleService } from '../../services/schedule.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
 export class ScheduleListComponent implements OnInit {
 
-  schedules: Schedule[] | undefined;
+  schedules: ScheduleDTO[] | undefined;
 
   constructor(private scheduleService: ScheduleService, private router: Router) {
   }
@@ -32,7 +32,7 @@ export class ScheduleListComponent implements OnInit {
   }
 
   updateSchedule(idSchedule: number) {
-    this.router.navigate(['update-schedule', idSchedule]);
+    this.router.navigate(['schedule/update', idSchedule]);
   }
 
   deleteSchedule(idSchedule: number) {

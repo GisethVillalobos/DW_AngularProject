@@ -3,15 +3,15 @@
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="days">Days</label>
-            <input type="text" class="form-control" id="days" [(ngModel)]="ScheduleDTO.days" name="days">
+            <input type="text" class="form-control" id="days" [(ngModel)]="scheduleDTO.days" name="days">
         </div>
         <div class="form-group">
             <label for="timeStart">Time Start (HH:mm)</label>
-            <input type="text" class="form-control" id="timeStart" [(ngModel)]="ScheduleDTO.timeStart" name="timeStart">
+            <input type="text" class="form-control" id="timeStart" [(ngModel)]="scheduleDTO.timeStart" name="timeStart">
         </div>
         <div class="form-group">
             <label for="timeEnd">Time End (HH:mm)</label>
-            <input type="text" class="form-control" id="timeEnd" [(ngModel)]="ScheduleDTO.timeEnd" name="timeEnd">
+            <input type="text" class="form-control" id="timeEnd" [(ngModel)]="scheduleDTO.timeEnd" name="timeEnd">
         </div>
         <button class="btn btn-success mt-2" type="submit">Update</button>
     </form>

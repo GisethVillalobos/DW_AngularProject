@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BusDTO } from '../../dto/bus-dto';
 import { BusService } from '../../services/bus.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bus-create',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './bus-create.component.html',
   styleUrl: './bus-create.component.css'
 })
 
 export class BusCreateComponent implements OnInit {
 
-  busDTO: BusDTO = new BusDTO(null, "", "");
+  busDTO: BusDTO = new BusDTO(0, "", "");
 
   constructor(private busService: BusService, private router: Router) { }
 

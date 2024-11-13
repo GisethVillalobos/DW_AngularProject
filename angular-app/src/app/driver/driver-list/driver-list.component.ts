@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Driver } from '../../model/driver.model';
-import { DriverService } from '../../services/driver.service';
 import { Router } from '@angular/router';
+import { DriverDTO } from '../../dto/driver-dto';
+import { DriverService } from '../../services/driver.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
 export class DriverListComponent implements OnInit {
   
-  drivers: Driver[] | undefined;
+  drivers: DriverDTO[] | undefined;
   
   constructor(private driverService: DriverService, private router: Router) {
   }
@@ -32,7 +32,7 @@ export class DriverListComponent implements OnInit {
   }
   
   updateDriver(idDriver: number) {
-    this.router.navigate(['update-driver', idDriver]);
+    this.router.navigate(['driver/update', idDriver]);
   }
   
   deleteDriver(idDriver: number) {

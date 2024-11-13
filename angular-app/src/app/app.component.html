@@ -1,13 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
-  <a class="navbar-brand" routerLink="">TransmiApp</a>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="">TransmiApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-          <a class="nav-item nav-link active" routerLinkActive="active" routerLink="assignments">Assignment List</a>
-          <a class="nav-item nav-link active" routerLinkActive="active" routerLink="buses">Bus List</a>
-          <a class="nav-item nav-link active" routerLinkActive="active" routerLink="drivers">Driver List</a>
-          <a class="nav-item nav-link active" routerLinkActive="active" routerLink="routes">Route List</a>
-          <a class="nav-item nav-link active" routerLinkActive="active" routerLink="schedules">Schedule List</a>
+        <a class="nav-item nav-link" routerLink="assignment/all" routerLinkActive="active">Assignment List</a>
+        <a class="nav-item nav-link" routerLink="bus/all" routerLinkActive="active">Bus List</a>
+        <a class="nav-item nav-link" routerLink="driver/all" routerLinkActive="active">Driver List</a>
+        <a class="nav-item nav-link" routerLink="route/all" routerLinkActive="active">Route List</a>
+        <a class="nav-item nav-link" routerLink="schedule/all" routerLinkActive="active">Schedule List</a>
       </div>
+    </div>
   </div>
 </nav>
+
 <router-outlet></router-outlet>

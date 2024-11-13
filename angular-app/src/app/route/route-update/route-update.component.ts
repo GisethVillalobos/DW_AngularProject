@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RouteDTO } from '../../dto/route-dto';
 import { RouteService } from '../../services/route.service';
-import { Route } from '../../model/route.model';
 
 @Component({
   selector: 'app-route-update',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './route-update.component.html',
   styleUrl: './route-update.component.css'
 })
 
 export class RouteUpdateComponent implements OnInit {
   id!: number;
-  routeE: Route = new Route();
+
+  routeDTO: RouteDTO = new RouteDTO(0, "", ["", "", ""]);
 
   constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router) { }
 
@@ -21,7 +25,7 @@ export class RouteUpdateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.routeService.getRouteById(this.id).subscribe({
       next: (data) => {
-        this.routeE = data;
+        this.routeDTO = data;
       },
       error: (e) => {
         console.log(e);
@@ -34,7 +38,7 @@ export class RouteUpdateComponent implements OnInit {
   }
 
   updateRoute() {
-    this.routeService.updateRoute(this.id, this.routeE).subscribe({
+    this.routeService.updateRoute(this.id, this.routeDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToRouteList();
@@ -50,7 +54,7 @@ export class RouteUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.route);
+    console.log(this.routeDTO);
     this.updateRoute();
   }
 }

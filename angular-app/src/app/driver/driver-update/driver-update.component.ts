@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DriverDTO } from '../../dto/driver-dto';
 import { DriverService } from '../../services/driver.service';
-import { Driver } from '../../model/driver.model';
 
 @Component({
   selector: 'app-driver-update',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './driver-update.component.html',
   styleUrl: './driver-update.component.css'
 })
 
 export class DriverUpdateComponent implements OnInit {
   id!: number;
-  driver: Driver = new Driver();
+  
+  driverDTO: DriverDTO = new DriverDTO(0, "", "", "", "");
 
   constructor(private driverService: DriverService,
     private route: ActivatedRoute, private router: Router) { }
@@ -22,7 +26,7 @@ export class DriverUpdateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.driverService.getDriverById(this.id).subscribe({
       next: (data) => {
-        this.driver = data;
+        this.driverDTO = data;
       },
       error: (e) => {
         console.log(e);
@@ -35,7 +39,7 @@ export class DriverUpdateComponent implements OnInit {
   }
 
   updateDriver() {
-    this.driverService.updateDriver(this.id, this.driver).subscribe({
+    this.driverService.updateDriver(this.id, this.driverDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToDriverList();
@@ -51,7 +55,7 @@ export class DriverUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.driver);
+    console.log(this.driverDTO);
     this.updateDriver();
   }
 }

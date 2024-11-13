@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Bus } from '../../model/bus.model';
-import { BusService } from '../../services/bus.service';
 import { Router } from '@angular/router';
+import { BusDTO } from '../../dto/bus-dto';
+import { BusService } from '../../services/bus.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
 export class BusListComponent implements OnInit {
   
-  buses: Bus[] | undefined;
+  buses: BusDTO[] | undefined;
   
   constructor(private busService: BusService, private router: Router) {
   }
@@ -32,7 +32,7 @@ export class BusListComponent implements OnInit {
   }
   
   updateBus(idBus: number) {
-    this.router.navigate(['update-bus', idBus]);
+    this.router.navigate(['bus/update', idBus]);
   }
   
   deleteBus(idBus: number) {

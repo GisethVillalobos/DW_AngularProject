@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '../../model/route.model';
-import { RouteService } from '../../services/route.service';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouteDTO } from '../../dto/route-dto';
+import { RouteService } from '../../services/route.service';
 
 @Component({
   selector: 'app-route-create',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './route-create.component.html',
   styleUrl: './route-create.component.css'
 })
 
 export class RouteCreateComponent implements OnInit {
 
-  routeDTO: RouteDTO = new RouteDTO(null, "", ["", "", ""]);
+  routeDTO: RouteDTO = new RouteDTO(0, "", ["", "", ""]);
 
   constructor(private routeService: RouteService, private router: Router) { }
 

@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { DriverService } from '../../services/driver.service';
 import { Router } from '@angular/router';
 import { DriverDTO } from '../../dto/driver-dto';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-driver-create',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './driver-create.component.html',
   styleUrl: './driver-create.component.css'
 })
 
 export class DriverCreateComponent implements OnInit {
 
-  driverDTO: DriverDTO = new DriverDTO(null, "", "", "", "");
+  driverDTO: DriverDTO = new DriverDTO(0, "", "", "", "");
 
   constructor(private driverService: DriverService, private router: Router) { }
 

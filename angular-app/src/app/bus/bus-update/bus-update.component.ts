@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BusDTO } from '../../dto/bus-dto';
 import { BusService } from '../../services/bus.service';
-import { Bus } from '../../model/bus.model';
 
 @Component({
   selector: 'app-bus-update',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './bus-update.component.html',
   styleUrl: './bus-update.component.css'
 })
 
 export class BusUpdateComponent implements OnInit {
   id!: number;
-  bus: Bus = new Bus();
+
+  busDTO: BusDTO = new BusDTO(0, "", "");
 
   constructor(private busService: BusService,
     private route: ActivatedRoute, private router: Router) { }
@@ -22,7 +26,7 @@ export class BusUpdateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.busService.getBusById(this.id).subscribe({
       next: (data) => {
-        this.bus = data;
+        this.busDTO = data;
       },
       error: (e) => {
         console.log(e);
@@ -35,7 +39,7 @@ export class BusUpdateComponent implements OnInit {
   }
 
   updateBus() {
-    this.busService.updateBus(this.id, this.bus).subscribe({
+    this.busService.updateBus(this.id, this.busDTO).subscribe({
       next: (data) => {
         console.log(data);
         this.redirectToBusList();
@@ -51,7 +55,7 @@ export class BusUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.bus);
+    console.log(this.busDTO);
     this.updateBus();
   }
 }

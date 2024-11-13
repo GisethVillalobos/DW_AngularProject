@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '../../model/route.model';
-import { RouteService } from '../../services/route.service';
 import { Router } from '@angular/router';
+import { RouteDTO } from '../../dto/route-dto';
+import { RouteService } from '../../services/route.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
 export class RouteListComponent implements OnInit {
 
-  routes: Route[] | undefined;
+  routes: RouteDTO[] | undefined;
   
   constructor(private routeService: RouteService, private router: Router) {
   }
@@ -32,7 +32,7 @@ export class RouteListComponent implements OnInit {
   }
   
   updateRoute(idRoute: number) {
-    this.router.navigate(['update-route', idRoute]);
+    this.router.navigate(['route/update', idRoute]);
   }
   
   deleteRoute(idRoute: number) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Assignment } from '../../model/assignment.model';
-import { AssignmentService } from '../../services/assignment.service';
 import { Router } from '@angular/router';
+import { AssignmentDTO } from '../../dto/assignment-dto';
+import { AssignmentService } from '../../services/assignment.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
 export class AssignmentListComponent implements OnInit {
   
-  assignments: Assignment[] | undefined;
+  assignments!: AssignmentDTO[];
   
   constructor(private assignmentService: AssignmentService, private router: Router) {
   }
@@ -32,7 +32,7 @@ export class AssignmentListComponent implements OnInit {
   }
   
   updateAssignment(idAssignment: number) {
-    this.router.navigate(['update-assignment', idAssignment]);
+    this.router.navigate(['assignment/update', idAssignment]);
   }
   
   deleteAssignment(idAssignment: number) {

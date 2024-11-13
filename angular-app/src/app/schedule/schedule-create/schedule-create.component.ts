@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Schedule } from '../../model/schedule.model';
-import { ScheduleService } from '../../services/schedule.service';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ScheduleDTO } from '../../dto/schedule-dto';
+import { ScheduleService } from '../../services/schedule.service';
 
 @Component({
   selector: 'app-schedule-create',
@@ -17,7 +16,7 @@ import { ScheduleDTO } from '../../dto/schedule-dto';
 
 export class ScheduleCreateComponent implements OnInit {
 
-  scheduleDTO: ScheduleDTO = new ScheduleDTO(null, ["", "", ""], "", "");
+  scheduleDTO: ScheduleDTO = new ScheduleDTO(0, ["", "", ""], "", "");
 
   constructor(private scheduleService: ScheduleService, private router: Router) { }
 

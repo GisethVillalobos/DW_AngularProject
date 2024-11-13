@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Bus } from '../../model/bus.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BusDTO } from '../../dto/bus-dto';
 import { BusService } from '../../services/bus.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-bus-details',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './bus-details.component.html',
   styleUrls: ['./bus-details.component.css']
 })
@@ -14,20 +17,21 @@ import { BusService } from '../../services/bus.service';
 export class BusDetailsComponent implements OnInit {
 
   id!: number;
-  bus!: Bus;
+
+  busDTO!: BusDTO;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private busService: BusService) { }
 
   ngOnInit() {
-    this.bus = new Bus();
+    this.busDTO = new BusDTO(0, "", "");
 
     this.id = this.route.snapshot.params['id'];
     
     this.busService.getBusById(this.id)
       .subscribe(data => {
         console.log(data);
-        this.bus = data;
+        this.busDTO = data;
       }, error => console.log(error));
   }
 

@@ -3,11 +3,11 @@
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="code">Code</label>
-            <input type="text" class="form-control" id="code" [(ngModel)]="RouteDTO.code" name="code">
+            <input type="text" class="form-control" id="code" [(ngModel)]="routeDTO.code" name="code">
         </div>
         <div class="form-group">
             <label for="stations">Stations</label>
-            <textarea class="form-control" id="stations" [(ngModel)]="RouteDTO.stations" name="stations"></textarea>
+            <textarea class="form-control" id="stations" [(ngModel)]="routeDTO.stations" name="stations"></textarea>
         </div>
         <button class="btn btn-success mt-2" type="submit">Submit</button>
     </form>

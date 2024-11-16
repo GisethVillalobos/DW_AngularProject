@@ -33,6 +33,11 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
+    public List<Long> getBusIds() {
+        return busRepository.findAllBusIdBuss();
+    }
+
+    @Override
     public BusDTO getBusById(Long idBus) {
         Bus bus = busRepository.findById(idBus).orElseThrow();
         return busDTOConverter.entityToDTO(bus);
@@ -59,6 +64,7 @@ public class BusServiceImpl implements BusService {
     @Override
     @Transactional
     public void deleteBus(Long idBus) {
+
         boolean hasDriverAssigned = assignmentRepository.existsByBusIdBusAndDriverNotNull(idBus);
         if (hasDriverAssigned) {
             throw new IllegalArgumentException("No es posible eliminar este bus. Tiene un conductor asignado.");

@@ -3,16 +3,24 @@
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="days">Days</label>
-            <input type="text" class="form-control" id="days" [(ngModel)]="scheduleDTO.days" name="days">
+            <div class="form-check" *ngFor="let day of daysOfWeek">
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [id]="day"
+                    [(ngModel)]="selectedDays[day]"
+                    [value]="day"
+                    name="days"
+                    [checked]="selectedDays[day]"  />
+                <label class="form-check-label" [for]="day">{{ day }}</label>
+            </div>
         </div>
         <div class="form-group">
             <label for="timeStart">Time Start (HH:mm)</label>
-            <input type="text" class="form-control" id="timeStart" [(ngModel)]="scheduleDTO.timeStart" name="timeStart">
-        </div>
+            <input type="time" class="form-control" id="timeStart" [(ngModel)]="scheduleDTO.timeStart" name="timeStart" [value]="scheduleDTO.timeStart"> </div>
         <div class="form-group">
             <label for="timeEnd">Time End (HH:mm)</label>
-            <input type="text" class="form-control" id="timeEnd" [(ngModel)]="scheduleDTO.timeEnd" name="timeEnd">
-        </div>
+            <input type="time" class="form-control" id="timeEnd" [(ngModel)]="scheduleDTO.timeEnd" name="timeEnd" [value]="scheduleDTO.timeEnd"> </div>
         <button class="btn btn-success mt-2" type="submit">Update</button>
     </form>
 </div>

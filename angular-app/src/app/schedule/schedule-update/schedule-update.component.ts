@@ -1,23 +1,30 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleDTO } from '../../dto/schedule-dto';
 import { ScheduleService } from '../../services/schedule.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule-update',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    CommonModule, 
+    ReactiveFormsModule
   ],
   templateUrl: './schedule-update.component.html',
-  styleUrl: './schedule-update.component.css'
+  styleUrl: './schedule-update.component.css',
 })
 
 export class ScheduleUpdateComponent implements OnInit {
   id!: number;
 
-  scheduleDTO: ScheduleDTO = new ScheduleDTO(0, ["", "", ""], "", "");
+  // Days of the week
+  daysOfWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  selectedDays: { [key: string]: boolean } = {};
+
+  scheduleDTO: ScheduleDTO = new ScheduleDTO(0, [], "", "");
 
   constructor(private scheduleService: ScheduleService, private route: ActivatedRoute, private router: Router) { }
 
@@ -26,6 +33,7 @@ export class ScheduleUpdateComponent implements OnInit {
     this.scheduleService.getScheduleById(this.id).subscribe({
       next: (data) => {
         this.scheduleDTO = data;
+        this.setSelectedDays();
       },
       error: (e) => {
         console.log(e);
@@ -35,6 +43,16 @@ export class ScheduleUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getScheduleById();
+
+  }
+
+  setSelectedDays() {
+    const daysArray = this.scheduleDTO.days || [];
+    console.log(daysArray);
+    daysArray.forEach(day => {
+      this.selectedDays[day] = true;
+    });
+    console.log('Selected Days:', this.selectedDays); // Ensure this has the right values
   }
 
   updateSchedule() {
@@ -50,11 +68,13 @@ export class ScheduleUpdateComponent implements OnInit {
   }
 
   redirectToScheduleList() {
-    this.router.navigate(['/schedules']);
+    this.router.navigate(['/schedule/all']);
   }
 
   onSubmit() {
     console.log(this.scheduleDTO);
+    const selectedDaysArray = Object.keys(this.selectedDays).filter(day => this.selectedDays[day]);
+    this.scheduleDTO.days = selectedDaysArray;
     this.updateSchedule();
   }
 }

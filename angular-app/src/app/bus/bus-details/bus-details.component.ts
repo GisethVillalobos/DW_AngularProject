@@ -36,6 +36,6 @@ export class BusDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['buses']);
+    this.router.navigate(['bus/all']);
   }
 }

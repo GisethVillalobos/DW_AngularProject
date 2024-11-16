@@ -37,6 +37,6 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['routes']);
+    this.router.navigate(['route/all']);
   }
 }

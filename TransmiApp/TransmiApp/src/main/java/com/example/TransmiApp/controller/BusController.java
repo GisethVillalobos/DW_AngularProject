@@ -41,6 +41,12 @@ public class BusController {
         return busService.getAllBuses();
     }
 
+    @GetMapping("/ids")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Long> findAllBusIds() {
+        return busService.getBusIds();
+    }
+
     @GetMapping("/read/{idBus}")
     @ResponseStatus(value = HttpStatus.OK)
     public BusDTO findById(@PathVariable Long idBus) {

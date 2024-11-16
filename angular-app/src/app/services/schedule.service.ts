@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ScheduleDTO } from '../dto/schedule-dto';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { ScheduleDTO } from '../dto/schedule-dto';
 
 export class ScheduleService {
   
-  private basUrl = "http://localhost:8080/api/schedule"
+  private basUrl = environment.SERVER_URL + "/schedule";
 
   private httpOptions = {
     headers: new HttpHeaders({

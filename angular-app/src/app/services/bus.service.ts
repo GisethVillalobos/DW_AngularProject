@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BusDTO } from '../dto/bus-dto';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusService {
   
-  private basUrl = "http://localhost:8080/api/bus"
+  private basUrl = environment.SERVER_URL + "/bus";
 
   private httpOptions = {
     headers: new HttpHeaders({

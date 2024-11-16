@@ -36,6 +36,6 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['assignments']);
+    this.router.navigate(['assignment/all']);
   }
 }

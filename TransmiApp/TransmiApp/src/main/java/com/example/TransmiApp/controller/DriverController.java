@@ -39,6 +39,12 @@ public class DriverController {
         return driverService.getAllDrivers();
     }
 
+    @GetMapping("/ids")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Long> findAllDriverIds() {
+        return driverService.getDriverIds();
+    }
+
     @GetMapping("/read/{idDriver}")
     @ResponseStatus(value = HttpStatus.OK)
     public DriverDTO findById(@PathVariable Long idDriver) {

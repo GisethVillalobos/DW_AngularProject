@@ -3,12 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ScheduleDTO } from '../../dto/schedule-dto';
 import { ScheduleService } from '../../services/schedule.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-schedule-create',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './schedule-create.component.html',
   styleUrl: './schedule-create.component.css'
@@ -16,7 +18,11 @@ import { ScheduleService } from '../../services/schedule.service';
 
 export class ScheduleCreateComponent implements OnInit {
 
-  scheduleDTO: ScheduleDTO = new ScheduleDTO(0, ["", "", ""], "", "");
+  // Days of the week
+  daysOfWeek: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  selectedDays: { [key: string]: boolean } = {};
+
+  scheduleDTO: ScheduleDTO = new ScheduleDTO(0, [], "", "");
 
   constructor(private scheduleService: ScheduleService, private router: Router) { }
 
@@ -24,6 +30,10 @@ export class ScheduleCreateComponent implements OnInit {
   }
 
   saveSchedule() {
+
+    this.scheduleDTO.days = Object.keys(this.selectedDays)
+    .filter(day => this.selectedDays[day]);
+
     this.scheduleService.createSchedule(this.scheduleDTO).subscribe({
       next: (data) => {
         console.log(data);
@@ -36,7 +46,7 @@ export class ScheduleCreateComponent implements OnInit {
   }
 
   redirectToScheduleList() {
-    this.router.navigate(['/schedules']);
+    this.router.navigate(['/schedule/all']);
   }
 
   onSubmit() {

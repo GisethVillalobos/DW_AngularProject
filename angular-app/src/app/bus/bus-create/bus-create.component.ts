@@ -36,7 +36,7 @@ export class BusCreateComponent implements OnInit {
   }
 
   redirectToBusList() {
-    this.router.navigate(['/buss']);
+    this.router.navigate(['/bus/all']);
   }
 
   onSubmit() {

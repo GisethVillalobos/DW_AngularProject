@@ -51,7 +51,7 @@ export class BusUpdateComponent implements OnInit {
   }
 
   redirectToBusList() {
-    this.router.navigate(['/buses']);
+    this.router.navigate(['/bus/all']);
   }
 
   onSubmit() {

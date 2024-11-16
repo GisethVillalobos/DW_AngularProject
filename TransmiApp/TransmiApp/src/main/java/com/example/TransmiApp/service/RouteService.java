@@ -7,6 +7,7 @@ import com.example.TransmiApp.model.Route;
 
 public interface RouteService {
     List<Route> getAllRoutes();
+    List<Long> getRouteIds();
     RouteDTO getRouteById(Long idRoute);
     RouteDTO createRoute(RouteDTO routeDTO);
     RouteDTO updateRoute(Long idRoute, RouteDTO routeDTO);

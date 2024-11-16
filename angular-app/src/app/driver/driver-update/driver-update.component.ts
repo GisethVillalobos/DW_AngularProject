@@ -51,7 +51,7 @@ export class DriverUpdateComponent implements OnInit {
   }
 
   redirectToDriverList() {
-    this.router.navigate(['/drivers']);
+    this.router.navigate(['/driver/all']);
   }
 
   onSubmit() {

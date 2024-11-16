@@ -2,21 +2,33 @@
     <h2 class="text-center">Update Assignment</h2>
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="idDriver">Driver ID</label>
-            <input type="number" class="form-control" id="idDriver" [(ngModel)]="assignmentDTO.idDriver" name="idDriver">
+            <label for="busId">Bus ID</label>
+            <select class="form-control" id="busId" [(ngModel)]="assignmentDTO.idBus" name="busId">
+                <option *ngFor="let id of availableBusIds" [value]="id">{{ id }}</option>
+            </select>
         </div>
+
         <div class="form-group">
-            <label for="idBus">Bus ID</label>
-            <input type="number" class="form-control" id="idBus" [(ngModel)]="assignmentDTO.idBus" name="idBus">
+            <label for="driverId">Driver ID</label>
+            <select class="form-control" id="driverId" [(ngModel)]="assignmentDTO.idDriver" name="driverId">
+                <option *ngFor="let id of availableDriverIds" [value]="id">{{ id }}</option>
+            </select>
         </div>
+
         <div class="form-group">
-            <label for="idRoute">Route ID</label>
-            <input type="number" class="form-control" id="idRoute" [(ngModel)]="assignmentDTO.idRoute" name="idRoute">
+            <label for="routeId">Route ID</label>
+            <select class="form-control" id="routeId" [(ngModel)]="assignmentDTO.idRoute" name="routeId">
+                <option *ngFor="let id of availableRouteIds" [value]="id">{{ id }}</option>
+            </select>
         </div>
+
         <div class="form-group">
-            <label for="idSchedule">Schedule ID</label>
-            <input type="number" class="form-control" id="idSchedule" [(ngModel)]="assignmentDTO.idSchedule" name="idSchedule">
+            <label for="scheduleId">Schedule ID</label>
+            <select class="form-control" id="scheduleId" [(ngModel)]="assignmentDTO.idSchedule" name="scheduleId">
+                <option *ngFor="let id of availableScheduleIds" [value]="id">{{ id }}</option>
+            </select>
         </div>
+
         <button class="btn btn-success mt-2" type="submit">Update</button>
     </form>
 </div>

@@ -33,6 +33,11 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
+    public List<Long> getRouteIds() {
+        return routeRepository.findAllRouteIdRoutes();
+    }
+
+    @Override
     public RouteDTO getRouteById(Long idRoute) {
         Route route = routeRepository.findById(idRoute).orElseThrow();
         return routeDTOConverter.entityToDTO(route);

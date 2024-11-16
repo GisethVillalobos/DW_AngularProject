@@ -7,6 +7,7 @@ import com.example.TransmiApp.model.Schedule;
 
 public interface ScheduleService {
     List<Schedule> getAllSchedules();
+    List<Long> getScheduleIds();
     ScheduleDTO getScheduleById(Long idSchedule);
     ScheduleDTO createSchedule(ScheduleDTO scheduleDTO);
     ScheduleDTO updateSchedule(Long idSchedule, ScheduleDTO scheduleDTO);

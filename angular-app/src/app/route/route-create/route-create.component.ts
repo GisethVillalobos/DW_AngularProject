@@ -3,18 +3,25 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouteDTO } from '../../dto/route-dto';
 import { RouteService } from '../../services/route.service';
+import { compileOpaqueAsyncClassMetadata } from '@angular/compiler';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-route-create',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './route-create.component.html',
   styleUrl: './route-create.component.css'
 })
 
 export class RouteCreateComponent implements OnInit {
+
+    // Stations available
+    stationsAv: string[] = ['Station A', 'Station B', 'Station C', 'Station D', 'Station E', 'Station F', 'Station G'];
+    selectedStations: { [key: string]: boolean } = {};
 
   routeDTO: RouteDTO = new RouteDTO(0, "", ["", "", ""]);
 
@@ -24,6 +31,10 @@ export class RouteCreateComponent implements OnInit {
   }
 
   saveRoute() {
+
+    this.routeDTO.stations = Object.keys(this.selectedStations)
+    .filter(station => this.selectedStations[station]);
+
     this.routeService.createRoute(this.routeDTO).subscribe({
       next: (data) => {
         console.log(data);
@@ -36,7 +47,7 @@ export class RouteCreateComponent implements OnInit {
   }
 
   redirectToRouteList() {
-    this.router.navigate(['/routes']);
+    this.router.navigate(['/route/all']);
   }
 
   onSubmit() {

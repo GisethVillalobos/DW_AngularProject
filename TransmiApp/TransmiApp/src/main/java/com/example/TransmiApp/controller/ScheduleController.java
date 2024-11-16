@@ -39,6 +39,12 @@ public class ScheduleController {
         return scheduleService.getAllSchedules();
     }
 
+    @GetMapping("/ids")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Long> findAllScheduleIds() {
+        return scheduleService.getScheduleIds();
+    }
+
     @GetMapping("/read/{idSchedule}")
     @ResponseStatus(value = HttpStatus.OK)
     public ScheduleDTO findById(@PathVariable Long idSchedule) {

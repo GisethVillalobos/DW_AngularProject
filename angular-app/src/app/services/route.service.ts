@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RouteDTO } from '../dto/route-dto';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class RouteService {
   
-  private basUrl = "http://localhost:8080/api/route"
+  private basUrl = environment.SERVER_URL + "/route";
 
   private httpOptions = {
     headers: new HttpHeaders({

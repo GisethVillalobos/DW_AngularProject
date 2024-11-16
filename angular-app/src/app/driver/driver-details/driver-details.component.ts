@@ -36,6 +36,6 @@ export class DriverDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['drivers']);
+    this.router.navigate(['driver/all']);
   }
 }

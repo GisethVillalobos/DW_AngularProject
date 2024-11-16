@@ -40,6 +40,12 @@ public class RouteController {
         return routeService.getAllRoutes();
     }
 
+    @GetMapping("/ids")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Long> findAllRouteIds() {
+        return routeService.getRouteIds();
+    }
+
     @GetMapping("/read/{idRoute}")
     @ResponseStatus(value = HttpStatus.OK)
     public RouteDTO findById(@PathVariable Long idRoute) {

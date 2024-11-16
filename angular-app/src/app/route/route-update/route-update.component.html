@@ -7,7 +7,17 @@
         </div>
         <div class="form-group">
             <label for="stations">Stations</label>
-            <input type="text" class="form-control" id="stations" [(ngModel)]="routeDTO.stations" name="stations">
+            <div class="form-check" *ngFor="let station of stationsAv">
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [id]="station"
+                    [(ngModel)]="selectedStations[station]"
+                    [value]="station"
+                    name="stations"
+                />
+                <label class="form-check-label" [for]="station">{{ station }}</label>
+            </div>
         </div>
         <button class="btn btn-success mt-2" type="submit">Update</button>
     </form>

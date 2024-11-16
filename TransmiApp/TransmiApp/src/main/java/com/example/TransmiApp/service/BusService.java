@@ -7,6 +7,7 @@ import com.example.TransmiApp.model.Bus;
 
 public interface BusService {
     List<Bus> getAllBuses();
+    List<Long> getBusIds();
     BusDTO getBusById(Long idBus);
     BusDTO createBus(BusDTO busDTO);
     BusDTO updateBus(Long idBus, BusDTO busDTO);

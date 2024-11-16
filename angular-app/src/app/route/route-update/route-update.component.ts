@@ -3,12 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouteDTO } from '../../dto/route-dto';
 import { RouteService } from '../../services/route.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-route-update',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './route-update.component.html',
   styleUrl: './route-update.component.css'
@@ -17,6 +19,8 @@ import { RouteService } from '../../services/route.service';
 export class RouteUpdateComponent implements OnInit {
   id!: number;
 
+  stationsAv: string[] = ['Station A', 'Station B', 'Station C', 'Station D', 'Station F', 'Station G'];
+  selectedStations: { [key: string]: boolean } = {};
   routeDTO: RouteDTO = new RouteDTO(0, "", ["", "", ""]);
 
   constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router) { }
@@ -26,6 +30,7 @@ export class RouteUpdateComponent implements OnInit {
     this.routeService.getRouteById(this.id).subscribe({
       next: (data) => {
         this.routeDTO = data;
+        this.setSelectedStations();
       },
       error: (e) => {
         console.log(e);
@@ -35,6 +40,12 @@ export class RouteUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRouteById();
+  }
+
+  setSelectedStations() {
+    this.stationsAv.forEach(station => {
+      this.selectedStations[station] = this.routeDTO.stations.includes(station);
+    });
   }
 
   updateRoute() {
@@ -50,10 +61,12 @@ export class RouteUpdateComponent implements OnInit {
   }
 
   redirectToRouteList() {
-    this.router.navigate(['/routes']);
+    this.router.navigate(['/route/all']);
   }
 
   onSubmit() {
+    const selectedStationsArray = Object.keys(this.selectedStations).filter(station => this.selectedStations[station]);
+    this.routeDTO.stations = selectedStationsArray;
     console.log(this.routeDTO);
     this.updateRoute();
   }

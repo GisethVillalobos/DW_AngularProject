@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { DriverDTO } from '../dto/driver-dto';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DriverService {
   
-  private basUrl = "http://localhost:8080/api/driver"
+  private basUrl = environment.SERVER_URL + "/driver";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -23,7 +24,7 @@ export class DriverService {
   }
 
   createDriver(driverDTO: DriverDTO): Observable<Object> {
-    return this.httpClient.post(`${this.basUrl}/create/`, driverDTO);
+    return this.httpClient.post(`${this.basUrl}/create`, driverDTO);
   }
 
   getDriverById(idDriver: number): Observable<DriverDTO>{

@@ -35,6 +35,6 @@ export class ScheduleDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['schedules']);
+    this.router.navigate(['schedule/all']);
   }
 }

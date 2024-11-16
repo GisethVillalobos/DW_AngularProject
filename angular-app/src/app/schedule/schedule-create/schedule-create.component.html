@@ -3,7 +3,17 @@
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="days">Days</label>
-            <input type="text" class="form-control" id="days" [(ngModel)]="scheduleDTO.days" name="days" placeholder="Comma-separated (e.g., Monday,Tuesday)">
+            <div class="form-check" *ngFor="let day of daysOfWeek">
+                <input
+                        type="checkbox"
+                        class="form-check-input"
+                        [id]="day"
+                        [(ngModel)]="selectedDays[day]"
+                        [value]="day"
+                        name="days"
+                    />
+                <label class="form-check-label" [for]="day">{{ day }}</label>
+            </div>
         </div>
         <div class="form-group">
             <label for="timeStart">Time Start (HH:mm)</label>

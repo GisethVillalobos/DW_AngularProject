@@ -33,6 +33,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public List<Long> getScheduleIds() {
+        return scheduleRepository.findAllScheduleIdSchedules();
+    }
+
+    @Override
     public ScheduleDTO getScheduleById(Long idSchedule) {
         return scheduleDTOConverter.entityToDTO(scheduleRepository.findById(idSchedule).orElseThrow());
     }

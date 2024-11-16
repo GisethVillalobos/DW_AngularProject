@@ -33,6 +33,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public List<Long> getDriverIds() {
+        return driverRepository.findAllDriverIdDrivers();
+    }
+
+    @Override
     public DriverDTO getDriverById(Long idDriver) {
         Driver driver = driverRepository.findById(idDriver).orElseThrow();
         return driverDTOConverter.entityToDTO(driver);

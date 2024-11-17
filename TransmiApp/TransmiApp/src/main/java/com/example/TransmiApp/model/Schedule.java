@@ -1,6 +1,6 @@
 package com.example.TransmiApp.model;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,21 +27,21 @@ public class Schedule {
     private Long idSchedule;
 
     private List<String> days;
-    private Time timeStart;
-    private Time timeEnd;
+    private LocalTime timeStart;
+    private LocalTime timeEnd;
 
     @JsonIgnore
     @OneToMany(mappedBy = "schedule")
     private List<Assignment> assignments;
 
-    public Schedule(List<String> days, Time timeStart, Time timeEnd, List<Assignment> assignments) {
+    public Schedule(List<String> days, LocalTime timeStart, LocalTime timeEnd, List<Assignment> assignments) {
         this.days = days;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.assignments = assignments;
     }
 
-    public Schedule(List<String> days, Time timeStart, Time timeEnd) {
+    public Schedule(List<String> days, LocalTime timeStart, LocalTime timeEnd) {
         this.days = days;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
@@ -63,19 +63,19 @@ public class Schedule {
         this.days = days;
     }
 
-    public Time getTimeStart() {
+    public LocalTime getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(Time timeStart) {
+    public void setTimeStart(LocalTime timeStart) {
         this.timeStart = timeStart;
     }
 
-    public Time getTimeEnd() {
+    public LocalTime getTimeEnd() {
         return timeEnd;
     }
 
-    public void setTimeEnd(Time timeEnd) {
+    public void setTimeEnd(LocalTime timeEnd) {
         this.timeEnd = timeEnd;
     }
 

@@ -1,3 +1,6 @@
+<div class="creation">
+    <button (click) = "createRoute()" class="btn btn-info">New Route</button>
+</div>
 <div class="container">
     <h2 class="text-center">Route List</h2>
     <table class="table table-stripped">
@@ -15,6 +18,7 @@
                 <td> {{ route.code }} </td>
                 <td> {{ route.stations }} </td>
                 <td>
+                    <button (click) = "readRoute(route.idRoute)" class="btn btn-info">Details</button>
                     <button (click) = "updateRoute(route.idRoute)" class="btn btn-info">Update</button>
                     <button (click) = "deleteRoute(route.idRoute)" class="btn btn-danger">Delete</button>
                 </td>

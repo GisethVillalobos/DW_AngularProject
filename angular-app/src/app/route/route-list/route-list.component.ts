@@ -30,6 +30,14 @@ export class RouteListComponent implements OnInit {
       this.routes = data;
     });
   }
+
+  createRoute() {
+    this.router.navigate(['route/create']);
+  }
+
+  readRoute(idRoute: number) {
+    this.router.navigate(['route/read', idRoute]);
+  }
   
   updateRoute(idRoute: number) {
     this.router.navigate(['route/update', idRoute]);

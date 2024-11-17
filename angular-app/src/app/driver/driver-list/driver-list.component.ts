@@ -30,6 +30,14 @@ export class DriverListComponent implements OnInit {
       this.drivers = data;
     });
   }
+
+  createDriver() {
+    this.router.navigate(['driver/create']);
+  }
+
+  readDriver(idDriver: number) {
+    this.router.navigate(['driver/read', idDriver]);
+  }
   
   updateDriver(idDriver: number) {
     this.router.navigate(['driver/update', idDriver]);

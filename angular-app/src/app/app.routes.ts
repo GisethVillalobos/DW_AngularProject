@@ -20,11 +20,12 @@ import { ScheduleCreateComponent } from './schedule/schedule-create/schedule-cre
 import { ScheduleDetailsComponent } from './schedule/schedule-details/schedule-details.component';
 import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
 import { ScheduleUpdateComponent } from './schedule/schedule-update/schedule-update.component';
+import { MainComponent } from './main/main.component';
 
 export const routes: Routes = [
 
     //Main
-    { path: 'main', component: AppComponent},
+    { path: 'main', component: MainComponent},
     { path: '', pathMatch: 'full', redirectTo: 'main'},
 
     // Assignments

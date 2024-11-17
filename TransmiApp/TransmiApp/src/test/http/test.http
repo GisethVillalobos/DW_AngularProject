@@ -17,6 +17,15 @@ GET http://localhost:8080/api/schedule/all
 // Creating some entities
 
 ###
+POST http://localhost:8080/api/assignment/create
+Content-Type: application/json
+
+{
+  "idBus": 2,
+  "idRoute": 3
+}
+
+###
 POST http://localhost:8080/api/bus/create
 Content-Type: application/json
 
@@ -38,8 +47,38 @@ Content-Type: application/json
   ]
 }
 
+###
+
+POST http://localhost:8080/api/schedule/create
+Content-Type: application/json
+
+{
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday"
+  ],
+  "timeStart": "10:00",
+  "timeEnd": "17:02"
+}
+
+
+// Reading some entities
+
+###
+
+GET http://localhost:8080/api/assignment/read/1
 
 // Updating some entities
+
+###
+PUT http://localhost:8080/api/assignment/update/1
+Content-Type: application/json
+
+{
+  "idBus": "2",
+  "idRoute": "3"
+}
 
 ###
 PUT http://localhost:8080/api/bus/update/1
@@ -65,10 +104,10 @@ Content-Type: application/json
 DELETE http://localhost:8080/api/assignment/delete/3
 
 ###
-DELETE http://localhost:8080/api/bus/delete/20 
+DELETE http://localhost:8080/api/bus/delete/1 
 
 ###
-DELETE http://localhost:8080/api/driver/delete/20
+DELETE http://localhost:8080/api/driver/delete/1
 
 ###
 DELETE http://localhost:8080/api/route/delete/20

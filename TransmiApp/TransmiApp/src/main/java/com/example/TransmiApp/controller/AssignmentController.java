@@ -1,6 +1,7 @@
 package com.example.TransmiApp.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,35 +18,56 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.TransmiApp.dto.AssignmentDTO;
-import com.example.TransmiApp.model.Assignment;
 import com.example.TransmiApp.model.Bus;
 import com.example.TransmiApp.model.Driver;
 import com.example.TransmiApp.model.Route;
 import com.example.TransmiApp.model.Schedule;
+import com.example.TransmiApp.repository.BusRepository;
+import com.example.TransmiApp.repository.DriverRepository;
+import com.example.TransmiApp.repository.RouteRepository;
+import com.example.TransmiApp.repository.ScheduleRepository;
 import com.example.TransmiApp.service.AssignmentService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/assignment")
 public class AssignmentController {
+    
+    @Autowired
+    private BusRepository busRepository;
+
+    @Autowired
+    private DriverRepository driverRepository;
+
+    @Autowired
+    private RouteRepository routeRepository;
+
+    @Autowired
+    private ScheduleRepository scheduleRepository;
 
     @Autowired
     private AssignmentService assignmentService;
 
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public AssignmentDTO createAssignment(@RequestBody AssignmentDTO assignmentDTO, 
-                                          @RequestParam Bus bus, 
-                                          @RequestParam Driver driver, 
-                                          @RequestParam Route route, 
-                                          @RequestParam Schedule schedule) {
+    public AssignmentDTO createAssignment(@RequestBody AssignmentDTO assignmentDTO) {
+
+
+        Bus bus = busRepository.findById(assignmentDTO.getIdBus())
+                    .orElseThrow(() -> new NoSuchElementException("Bus not found with id: " + assignmentDTO.getIdBus()));
+        Driver driver = driverRepository.findById(assignmentDTO.getIdDriver())
+                    .orElseThrow(() -> new NoSuchElementException("Driver not found with id: " + assignmentDTO.getIdDriver()));
+        Route route = routeRepository.findById(assignmentDTO.getIdRoute())
+                    .orElseThrow(() -> new NoSuchElementException("Route not found with id: " + assignmentDTO.getIdRoute()));
+        Schedule schedule = scheduleRepository.findById(assignmentDTO.getIdSchedule())
+                    .orElseThrow(() -> new NoSuchElementException("Schedule not found with id: " + assignmentDTO.getIdSchedule()));
         // Pass the correct parameters to createAssignment
         return assignmentService.createAssignment(assignmentDTO, bus, driver, route, schedule);
     }
 
     @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Assignment> findAllAssignments() {
+    public List<AssignmentDTO> findAllAssignments() {
         return assignmentService.getAllAssignments();
     }
 

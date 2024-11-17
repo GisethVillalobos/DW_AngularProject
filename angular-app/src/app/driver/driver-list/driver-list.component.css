@@ -47,6 +47,13 @@ table {
     background-color: #f1f1f1;
 }
 
+.creation {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    padding: 0rem 12rem;
+}
+
 button {
     background-color: #001aff;
     border-color: #001aff;

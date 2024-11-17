@@ -1,3 +1,6 @@
+<div class="creation">
+    <button (click) = "createAssignment()" class="btn btn-info">New Assignment</button>
+</div>
 <div class="container">
     <h2 class="text-center">Assignment List</h2>
     <table class="table table-stripped">
@@ -19,6 +22,7 @@
                 <td> {{ assignment.idRoute }} </td>
                 <td> {{ assignment.idSchedule }} </td>
                 <td>
+                    <button (click) = "readAssignment(assignment.idAssignment)" class="btn btn-info">Details</button>
                     <button (click) = "updateAssignment(assignment.idAssignment)" class="btn btn-info">Update</button>
                     <button (click) = "deleteAssignment(assignment.idAssignment)" class="btn btn-danger">Delete</button>
                 </td>

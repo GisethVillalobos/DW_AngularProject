@@ -22,13 +22,21 @@ export class BusListComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getBuss();
+    this.getBuses();
   }
   
-  private getBuss() {
+  private getBuses() {
     this.busService.getBusList().subscribe(data => {
       this.buses = data;
     });
+  }
+
+  createBus() {
+    this.router.navigate(['bus/create']);
+  }
+
+  readBus(idBus: number) {
+    this.router.navigate(['bus/read', idBus]);
   }
   
   updateBus(idBus: number) {
@@ -38,7 +46,7 @@ export class BusListComponent implements OnInit {
   deleteBus(idBus: number) {
     this.busService.deleteBus(idBus).subscribe(data => {
       console.log(data);
-      this.getBuss();
+      this.getBuses();
     });
   }
 }

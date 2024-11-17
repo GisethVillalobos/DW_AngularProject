@@ -2,6 +2,7 @@ package com.example.TransmiApp.service.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,16 @@ public class AssignmentServiceImpl implements AssignmentService {
     private AssignmentDTOConverter assignmentDTOConverter;
 
     @Override
-    public List<Assignment> getAllAssignments() {
-        return (List<Assignment>) assignmentRepository.findAll();
+    public List<AssignmentDTO> getAllAssignments() {
+        return assignmentRepository.findAll().stream().map(assignment -> 
+        new AssignmentDTO(
+            assignment.getIdAssignment(),
+            assignment.getBus() != null ? assignment.getBus().getIdBus() : null,
+            assignment.getDriver() != null ? assignment.getDriver().getIdDriver() : null,
+            assignment.getRoute() != null ? assignment.getRoute().getIdRoute() : null,
+            assignment.getSchedule() != null ? assignment.getSchedule().getIdSchedule() : null
+        )
+        ).collect(Collectors.toList());
     }
 
     @Override

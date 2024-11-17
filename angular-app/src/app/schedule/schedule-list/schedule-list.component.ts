@@ -31,6 +31,14 @@ export class ScheduleListComponent implements OnInit {
     });
   }
 
+  createSchedule() {
+    this.router.navigate(['schedule/create']);
+  }
+
+  readSchedule(idSchedule: number) {
+    this.router.navigate(['schedule/read', idSchedule]);
+  }
+
   updateSchedule(idSchedule: number) {
     this.router.navigate(['schedule/update', idSchedule]);
   }

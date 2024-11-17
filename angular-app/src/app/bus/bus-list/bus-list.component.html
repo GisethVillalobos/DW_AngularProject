@@ -1,3 +1,6 @@
+<div class="creation">
+    <button (click) = "createBus()" class="btn btn-info">New Bus</button>
+</div>
 <div class="container">
     <h2 class="text-center">Bus List</h2>
     <table class="table table-stripped">
@@ -15,6 +18,7 @@
                 <td> {{ bus.plate }} </td>
                 <td> {{ bus.model }} </td>
                 <td>
+                    <button (click) = "readBus(bus.idBus)" class="btn btn-info">Details</button>
                     <button (click) = "updateBus(bus.idBus)" class="btn btn-info">Update</button>
                     <button (click) = "deleteBus(bus.idBus)" class="btn btn-danger">Delete</button>
                 </td>

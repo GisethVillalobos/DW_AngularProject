@@ -11,14 +11,14 @@ import com.example.TransmiApp.model.Schedule;
 
 @Component
 public class AssignmentDTOConverter {
-
+    
     public AssignmentDTO entityToDTO(Assignment assignment) {
         return new AssignmentDTO(
             assignment.getIdAssignment(),
-            assignment.getBus().getIdBus(),
-            assignment.getDriver().getIdDriver(),
-            assignment.getRoute().getIdRoute(),
-            assignment.getSchedule().getIdSchedule()
+            assignment.getBus() != null ? assignment.getBus().getIdBus() : null,
+            assignment.getDriver() != null ? assignment.getDriver().getIdDriver() : null,
+            assignment.getRoute() != null ? assignment.getRoute().getIdRoute() : null,
+            assignment.getSchedule() != null ? assignment.getSchedule().getIdSchedule() : null
         );
     }
 

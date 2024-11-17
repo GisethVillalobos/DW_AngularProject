@@ -1,6 +1,6 @@
 package com.example.TransmiApp.config;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,12 +44,12 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Initializing Schedule data
         Schedule schedule1 = new Schedule(Arrays.asList("Monday", "Wednesday", "Friday"), 
-                                           Time.valueOf("08:00:00"), 
-                                           Time.valueOf("17:00:00"), 
+                                           LocalTime.parse("08:00"), 
+                                           LocalTime.parse("17:00"), 
                                            new ArrayList<>());
         Schedule schedule2 = new Schedule(Arrays.asList("Tuesday", "Thursday"), 
-                                           Time.valueOf("10:00:00"), 
-                                           Time.valueOf("15:00:00"), 
+                                           LocalTime.parse("10:00"), 
+                                           LocalTime.parse("15:00"), 
                                            new ArrayList<>());
         scheduleRepository.saveAll(List.of(schedule1, schedule2));
 

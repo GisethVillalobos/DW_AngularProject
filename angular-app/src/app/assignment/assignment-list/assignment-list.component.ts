@@ -27,8 +27,17 @@ export class AssignmentListComponent implements OnInit {
   
   private getAssignments() {
     this.assignmentService.getAssignmentList().subscribe(data => {
+      console.log(data);
       this.assignments = data;
     });
+  }
+
+  createAssignment() {
+    this.router.navigate(['assignment/create']);
+  }
+
+  readAssignment(idAssignment: number) {
+    this.router.navigate(['assignment/read', idAssignment]);
   }
   
   updateAssignment(idAssignment: number) {

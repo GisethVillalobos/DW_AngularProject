@@ -1,5 +1,8 @@
 <nav>
-  <a class="navbar-brand" routerLink="">TransmiApp</a>
+  <div class="navbar-title">
+    <a class="navbar-brand" routerLink="">TransmiApp</a>
+    <button (click)="logOut()">Log Out</button>
+  </div>
   <div class="navbar-nav">
     <a class="nav-item nav-link" routerLink="assignment/all" routerLinkActive="active">Assignment List</a>
     <a class="nav-item nav-link" routerLink="bus/all" routerLinkActive="active">Bus List</a>

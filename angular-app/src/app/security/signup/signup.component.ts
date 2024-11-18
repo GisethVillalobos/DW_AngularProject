@@ -28,7 +28,7 @@ export class SignupComponent {
       (response) => {
         console.log(this.user);
         alert('Registration successful! You can now log in.');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/account/login']);
       },
       (error) => {
         // Handle error, for example, show an error message

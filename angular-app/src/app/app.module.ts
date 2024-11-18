@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,6 +26,7 @@ import { ScheduleCreateComponent } from './schedule/schedule-create/schedule-cre
 import { ScheduleDetailsComponent } from './schedule/schedule-details/schedule-details.component';
 import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
 import { ScheduleUpdateComponent } from './schedule/schedule-update/schedule-update.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [],
@@ -59,6 +60,12 @@ import { ScheduleUpdateComponent } from './schedule/schedule-update/schedule-upd
     ScheduleDetailsComponent
   
   ],
-  providers: []
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ]
 })
 export class AppModule { }

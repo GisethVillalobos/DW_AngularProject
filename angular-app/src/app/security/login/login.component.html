@@ -17,8 +17,12 @@
     </form>
   
     <!-- Error Message -->
-    <div *ngIf="errorMessage" class="error-message">
+    <div *ngIf="errorMessage" class="message">
       {{ errorMessage }}
+    </div>
+    <div class="message">
+      <p>Doesn't have an account? Create one!</p>
+      <button class="login" routerLink="signup" routerLinkActive="active">Sign Up</button>
     </div>
   </div>
   

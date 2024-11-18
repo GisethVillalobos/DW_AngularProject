@@ -1,15 +1,15 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BusDTO } from '../dto/bus-dto';
-import { environment } from '../../environments/environment.development';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusService {
   
-  private basUrl = environment.SERVER_URL + "/bus";
+  private basUrl = "bus";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -17,26 +17,26 @@ export class BusService {
     })
   };
   
-  constructor(private httpClient: HttpClient) {}
+  constructor(private apiService: ApiService) {}
   
   getBusList(): Observable<BusDTO[]> {
-    return this.httpClient.get<BusDTO[]>(`${this.basUrl}/all`);
+    return this.apiService.get(`${this.basUrl}/all`);
   }
 
   createBus(busDTO: BusDTO): Observable<Object> {
-    return this.httpClient.post(`${this.basUrl}/create`, busDTO);
+    return this.apiService.post(`${this.basUrl}/create`, busDTO);
   }
 
   getBusById(idBus: number): Observable<BusDTO>{
-    return this.httpClient.get<BusDTO>(`${this.basUrl}/read/${idBus}`);
+    return this.apiService.get(`${this.basUrl}/read/${idBus}`);
   }
 
   updateBus(idBus:number, busDTO: BusDTO): Observable<Object>{
-    return this.httpClient.put(`${this.basUrl}/update/${idBus}`, busDTO);
+    return this.apiService.put(`${this.basUrl}/update/${idBus}`, busDTO);
   }
 
   deleteBus(idBus:number): Observable<Object>{
-    return this.httpClient.delete(`${this.basUrl}/delete/${idBus}`);
+    return this.apiService.delete(`${this.basUrl}/delete/${idBus}`);
   }
   
 }

@@ -23,16 +23,18 @@ import { ScheduleUpdateComponent } from './schedule/schedule-update/schedule-upd
 import { MainComponent } from './main/main.component';
 import { SignupComponent } from './security/signup/signup.component';
 import { LoginComponent } from './security/login/login.component';
+import { AccountComponent } from './accounts/account/account.component';
 
 export const routes: Routes = [
 
     //Main
     { path: 'main', component: MainComponent},
-    { path: '', pathMatch: 'full', redirectTo: 'main'},
+    { path: '', pathMatch: 'full', redirectTo: 'account'},
 
     //Auth
-    { path: 'signup', component: SignupComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'account', component: AccountComponent },
+    { path: 'account/signup', component: SignupComponent },
+    { path: 'account/login', component: LoginComponent },
 
     // Assignments
     { path: 'assignment/create', component: AssignmentCreateComponent},

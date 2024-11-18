@@ -1,8 +1,8 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RouteDTO } from '../dto/route-dto';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment.development';
+import { RouteDTO } from '../dto/route-dto';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment.development';
 
 export class RouteService {
   
-  private basUrl = environment.SERVER_URL + "/route";
+  private basUrl = "route";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -18,26 +18,26 @@ export class RouteService {
     })
   };
   
-  constructor(private httpClient: HttpClient) {}
+  constructor(private apiService: ApiService) {}
   
   getRouteList(): Observable<RouteDTO[]> {
-    return this.httpClient.get<RouteDTO[]>(`${this.basUrl}/all`);
+    return this.apiService.get(`${this.basUrl}/all`);
   }
 
   createRoute(routeDTO: RouteDTO): Observable<Object> {
-    return this.httpClient.post(`${this.basUrl}/create`, routeDTO);
+    return this.apiService.post(`${this.basUrl}/create`, routeDTO);
   }
 
   getRouteById(idRoute: number): Observable<RouteDTO>{
-    return this.httpClient.get<RouteDTO>(`${this.basUrl}/read/${idRoute}`);
+    return this.apiService.get(`${this.basUrl}/read/${idRoute}`);
   }
 
   updateRoute(idRoute: number, routeDTO: RouteDTO): Observable<Object>{
-    return this.httpClient.put(`${this.basUrl}/update/${idRoute}`, routeDTO);
+    return this.apiService.put(`${this.basUrl}/update/${idRoute}`, routeDTO);
   }
 
   deleteRoute(idRoute:number): Observable<Object>{
-    return this.httpClient.delete(`${this.basUrl}/delete/${idRoute}`);
+    return this.apiService.delete(`${this.basUrl}/delete/${idRoute}`);
   }
   
 }

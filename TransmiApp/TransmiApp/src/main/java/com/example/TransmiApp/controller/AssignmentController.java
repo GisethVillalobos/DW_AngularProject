@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,7 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
+    @Secured({"ROLE_ADMIN", "ROLE_COORDI"})
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public AssignmentDTO createAssignment(@RequestBody AssignmentDTO assignmentDTO) {
@@ -63,18 +65,21 @@ public class AssignmentController {
         return assignmentService.createAssignment(assignmentDTO, bus, driver, route, schedule);
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_COORDI"})
     @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)
     public List<AssignmentDTO> findAllAssignments() {
         return assignmentService.getAllAssignments();
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_COORDI"})
     @GetMapping("/read/{idAssignment}")
     @ResponseStatus(value = HttpStatus.OK)
     public AssignmentDTO findById(@PathVariable Long idAssignment) {
         return assignmentService.getAssignmentById(idAssignment);
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_COORDI"})
     @PutMapping(value = "/update/{idAssignment}")
     @ResponseStatus(value = HttpStatus.OK)
     public AssignmentDTO updateAssignment(@PathVariable Long idAssignment, @RequestBody AssignmentDTO assignmentDTO) {
@@ -91,6 +96,7 @@ public class AssignmentController {
         return assignmentService.updateAssignment(idAssignment, assignmentDTO, bus, driver, route, schedule);
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_COORDI"})
     @DeleteMapping("/delete/{idAssignment}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteAssignment(@PathVariable Long idAssignment) {

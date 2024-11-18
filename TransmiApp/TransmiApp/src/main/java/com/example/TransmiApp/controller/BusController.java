@@ -30,42 +30,41 @@ public class BusController {
     @Autowired
     private BusService busService;
 
-    @Secured({"PASSENGER"})
+    @Secured({"ROLE_COORDI"})
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public BusDTO createBus(@RequestBody BusDTO busDTO) {
         return busService.createBus(busDTO);
     }
 
-    @Secured({"PASSENGER"})
+    @Secured({"ROLE_COORDI", "ROLE_PASSENGER"})
     @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Bus> findAllBuss() {
         return busService.getAllBuses();
     }
 
-    @Secured({"PASSENGER"})
     @GetMapping("/ids")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Long> findAllBusIds() {
         return busService.getBusIds();
     }
 
-    @Secured({"PASSENGER"})
+    @Secured({"ROLE_COORDI", "ROLE_PASSENGER"})
     @GetMapping("/read/{idBus}")
     @ResponseStatus(value = HttpStatus.OK)
     public BusDTO findById(@PathVariable Long idBus) {
         return busService.getBusById(idBus);
     }
 
-    @Secured({"PASSENGER"})
+    @Secured({"ROLE_COORDI"})
     @PutMapping("/update/{idBus}")
     @ResponseStatus(value = HttpStatus.OK)
     public BusDTO updateBus(@PathVariable Long idBus, @RequestBody BusDTO busDTO) {
         return busService.updateBus(idBus, busDTO);
     }
 
-    @Secured({"PASSENGER"})
+    @Secured({"ROLE_COORDI"})
     @DeleteMapping("/delete/{idBus}")
     public ResponseEntity<Void> deleteBus(@PathVariable Long idBus) {
         busService.deleteBus(idBus);

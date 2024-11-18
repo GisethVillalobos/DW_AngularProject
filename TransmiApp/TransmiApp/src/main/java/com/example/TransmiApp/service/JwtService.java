@@ -9,6 +9,7 @@ import java.util.function.Function;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,23 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String extractRole(String token) {
+        return extractClaim(token, claims -> claims.get("role", String.class));
     }
+    
+
+    public String generateToken(UserDetails userDetails) {
+
+        Map<String, Object> claims = new HashMap<>();
+
+        claims.put("role", userDetails.getAuthorities().stream()
+        .map(GrantedAuthority::getAuthority)
+        .findFirst()
+        .orElse("ROLE_PASSENGER"));
+
+        return generateToken(claims, userDetails);
+    }
+
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String userName = extractUserName(token);
@@ -51,6 +66,7 @@ public class JwtService {
                 .signWith(getSigningKey()).compact();
 
     }
+    
 
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());

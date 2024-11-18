@@ -31,16 +31,28 @@ public class AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     public JwtAuthenticationResponse signup(UserRegistrationDTO request) {
+        Role role = determineRoleByEmail(request.getEmail());
         User user = new User(
                 request.getFirstName(),
                 request.getLastName(),
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()),
-                Role.PASSENGER);
+                role);
+                
 
         userRepository.save(user);
         String jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt, user.getEmail(), user.getRole());
+    }
+
+    private Role determineRoleByEmail(String email) {
+        if (email.endsWith("@admin.transmi.com")) {
+            return Role.ADMIN;
+        } else if (email.endsWith("@coordi.transmi.com")) {
+            return Role.COORDI;
+        } else {
+            return Role.PASSENGER;
+        }
     }
 
     public JwtAuthenticationResponse login(LoginDTO request) {

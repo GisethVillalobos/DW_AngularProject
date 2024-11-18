@@ -1,6 +1,7 @@
 package com.example.TransmiApp.config;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +37,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private UserService userService;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.equals("/auth/signup") || path.equals("/auth/login");
+    }
+
+
+    @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain)
             throws ServletException, IOException {
@@ -53,12 +62,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UserDetails userDetails = userService.userDetailsService()
                         .loadUserByUsername(userEmail);
                 if (jwtService.isTokenValid(jwt, userDetails)) {
+
+                    
+                    String role = jwtService.extractRole(jwt);
+                    SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
+
+                    log.info("User role: {}", role);  // Log the role
+
                     SecurityContext context = SecurityContextHolder.createEmptyContext();
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
+                        userDetails, null, Collections.singleton(authority));
+
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     context.setAuthentication(authToken);
                     SecurityContextHolder.setContext(context);
+
+                    log.info("User roles: {}", SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
                 }
             }
         } catch (SignatureException e) {

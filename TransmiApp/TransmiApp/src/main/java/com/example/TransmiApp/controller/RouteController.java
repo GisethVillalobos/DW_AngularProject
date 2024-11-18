@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,17 +29,20 @@ public class RouteController {
     @Autowired
     private RouteService routeService;
 
+    @Secured({"ROLE_ADMIN"})
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public RouteDTO createRoute(@RequestBody RouteDTO routeDTO) {
         return routeService.createRoute(routeDTO);
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_PASSENGER"})
     @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Route> findAllRoutes() {
         return routeService.getAllRoutes();
     }
+
 
     @GetMapping("/ids")
     @ResponseStatus(value = HttpStatus.OK)
@@ -46,18 +50,21 @@ public class RouteController {
         return routeService.getRouteIds();
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_PASSENGER"})
     @GetMapping("/read/{idRoute}")
     @ResponseStatus(value = HttpStatus.OK)
     public RouteDTO findById(@PathVariable Long idRoute) {
         return routeService.getRouteById(idRoute);
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PutMapping("/update/{idRoute}")
     @ResponseStatus(value = HttpStatus.OK)
     public RouteDTO updateRoute(@PathVariable Long idRoute, @RequestBody RouteDTO routeDTO) {
         return routeService.updateRoute(idRoute, routeDTO);
     }
 
+    @Secured({"ROLE_ADMIN"})
     @DeleteMapping("/delete/{idRoute}")
     public ResponseEntity<Void> deleteRoute(@PathVariable Long idRoute) {
         routeService.deleteRoute(idRoute);

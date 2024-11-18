@@ -34,6 +34,7 @@ public class SecurityConfiguration {
     @Autowired
     private UserService userService;
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
             throws Exception {
@@ -46,9 +47,13 @@ public class SecurityConfiguration {
         return http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
-                        .permitAll()
+                .authorizeHttpRequests(request -> request
+                    .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/coordi/**").hasRole("COORDI")
+                    .requestMatchers("/passenger/**").hasRole("PASSENGER")
                         .anyRequest().authenticated()
+        
 
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))

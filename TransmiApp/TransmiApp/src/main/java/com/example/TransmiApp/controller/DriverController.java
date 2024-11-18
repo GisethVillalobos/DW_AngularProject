@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +28,14 @@ public class DriverController {
     @Autowired
     private DriverService driverService;
 
+    @Secured({"ROLE_COORDI"})
     @PostMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public DriverDTO createDriver(@RequestBody DriverDTO driverDTO) {
         return driverService.createDriver(driverDTO);
     }
 
+    @Secured({"ROLE_COORDI"})
     @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Driver> findAllDrivers() {
@@ -45,18 +48,21 @@ public class DriverController {
         return driverService.getDriverIds();
     }
 
+    @Secured({"ROLE_COORDI"})
     @GetMapping("/read/{idDriver}")
     @ResponseStatus(value = HttpStatus.OK)
     public DriverDTO findById(@PathVariable Long idDriver) {
         return driverService.getDriverById(idDriver);
     }
 
+    @Secured({"ROLE_COORDI"})
     @PutMapping("/update/{idDriver}")
     @ResponseStatus(value = HttpStatus.OK)
     public DriverDTO updateDriver(@PathVariable Long idDriver, @RequestBody DriverDTO driverDTO) {
         return driverService.updateDriver(idDriver, driverDTO);
     }
 
+    @Secured({"ROLE_COORDI"})
     @DeleteMapping("/delete/{idDriver}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteDriver(@PathVariable Long idDriver) {

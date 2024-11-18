@@ -21,7 +21,7 @@ export class RouteUpdateComponent implements OnInit {
 
   stationsAv: string[] = ['Station A', 'Station B', 'Station C', 'Station D', 'Station F', 'Station G'];
   selectedStations: { [key: string]: boolean } = {};
-  routeDTO: RouteDTO = new RouteDTO(0, "", ["", "", ""]);
+  routeDTO: RouteDTO = new RouteDTO(0, "", []);
 
   constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router) { }
 
@@ -30,7 +30,6 @@ export class RouteUpdateComponent implements OnInit {
     this.routeService.getRouteById(this.id).subscribe({
       next: (data) => {
         this.routeDTO = data;
-        this.setSelectedStations();
       },
       error: (e) => {
         console.log(e);
@@ -39,6 +38,7 @@ export class RouteUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setSelectedStations();
     this.getRouteById();
   }
 
@@ -67,7 +67,6 @@ export class RouteUpdateComponent implements OnInit {
   onSubmit() {
     const selectedStationsArray = Object.keys(this.selectedStations).filter(station => this.selectedStations[station]);
     this.routeDTO.stations = selectedStationsArray;
-    console.log(this.routeDTO);
     this.updateRoute();
   }
 }

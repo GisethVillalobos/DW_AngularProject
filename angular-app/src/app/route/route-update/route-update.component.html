@@ -9,12 +9,14 @@
             <label for="stations">Stations</label>
             <div class="form-check" *ngFor="let station of stationsAv">
                 <input
+                    id="stations"
                     type="checkbox"
                     class="form-check-input"
                     [id]="station"
                     [(ngModel)]="selectedStations[station]"
                     [value]="station"
                     name="stations"
+                    [checked]="selectedStations[station]"
                 />
                 <label class="form-check-label" [for]="station">{{ station }}</label>
             </div>

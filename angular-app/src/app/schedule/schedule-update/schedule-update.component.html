@@ -3,7 +3,7 @@
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="days">Days</label>
-            <div class="form-check" *ngFor="let day of daysOfWeek">
+            <div class="form-check" *ngFor="let day of availableDays">
                 <input
                     type="checkbox"
                     class="form-check-input"
@@ -11,7 +11,8 @@
                     [(ngModel)]="selectedDays[day]"
                     [value]="day"
                     name="days"
-                    [checked]="selectedDays[day]"  />
+                    [checked]="selectedDays[day]" 
+                />
                 <label class="form-check-label" [for]="day">{{ day }}</label>
             </div>
         </div>

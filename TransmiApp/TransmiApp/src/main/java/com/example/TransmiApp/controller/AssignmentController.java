@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,7 +51,6 @@ public class AssignmentController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public AssignmentDTO createAssignment(@RequestBody AssignmentDTO assignmentDTO) {
 
-
         Bus bus = busRepository.findById(assignmentDTO.getIdBus())
                     .orElseThrow(() -> new NoSuchElementException("Bus not found with id: " + assignmentDTO.getIdBus()));
         Driver driver = driverRepository.findById(assignmentDTO.getIdDriver())
@@ -79,12 +77,17 @@ public class AssignmentController {
 
     @PutMapping(value = "/update/{idAssignment}")
     @ResponseStatus(value = HttpStatus.OK)
-    public AssignmentDTO updateAssignment(@PathVariable Long idAssignment, 
-                                          @RequestBody AssignmentDTO assignmentDTO, 
-                                          @RequestParam Bus bus, 
-                                          @RequestParam Driver driver, 
-                                          @RequestParam Route route, 
-                                          @RequestParam Schedule schedule) {
+    public AssignmentDTO updateAssignment(@PathVariable Long idAssignment, @RequestBody AssignmentDTO assignmentDTO) {
+
+        Bus bus = busRepository.findById(assignmentDTO.getIdBus())
+                    .orElseThrow(() -> new NoSuchElementException("Bus not found with id: " + assignmentDTO.getIdBus()));
+        Driver driver = driverRepository.findById(assignmentDTO.getIdDriver())
+                    .orElseThrow(() -> new NoSuchElementException("Driver not found with id: " + assignmentDTO.getIdDriver()));
+        Route route = routeRepository.findById(assignmentDTO.getIdRoute())
+                    .orElseThrow(() -> new NoSuchElementException("Route not found with id: " + assignmentDTO.getIdRoute()));
+        Schedule schedule = scheduleRepository.findById(assignmentDTO.getIdSchedule())
+                    .orElseThrow(() -> new NoSuchElementException("Schedule not found with id: " + assignmentDTO.getIdSchedule()));
+
         return assignmentService.updateAssignment(idAssignment, assignmentDTO, bus, driver, route, schedule);
     }
 

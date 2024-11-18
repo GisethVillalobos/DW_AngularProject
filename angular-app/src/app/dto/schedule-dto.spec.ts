@@ -1,7 +1,7 @@
-import { ScheduleDto } from './schedule-dto';
+import { ScheduleDTO } from './schedule-dto';
 
 describe('ScheduleDto', () => {
   it('should create an instance', () => {
-    expect(new ScheduleDto()).toBeTruthy();
+    expect(new ScheduleDTO()).toBeTruthy();
   });
 });

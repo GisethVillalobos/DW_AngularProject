@@ -1,7 +1,7 @@
-import { DriverDto } from './driver-dto';
+import { DriverDTO } from './driver-dto';
 
 describe('DriverDto', () => {
   it('should create an instance', () => {
-    expect(new DriverDto()).toBeTruthy();
+    expect(new DriverDTO()).toBeTruthy();
   });
 });

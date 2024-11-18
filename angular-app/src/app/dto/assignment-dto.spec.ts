@@ -1,7 +1,7 @@
-import { AssignmentDto } from './assignment-dto';
+import { AssignmentDTO } from './assignment-dto';
 
 describe('AssignmentDto', () => {
   it('should create an instance', () => {
-    expect(new AssignmentDto()).toBeTruthy();
+    expect(new AssignmentDTO()).toBeTruthy();
   });
 });

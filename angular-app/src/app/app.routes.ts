@@ -21,12 +21,18 @@ import { ScheduleDetailsComponent } from './schedule/schedule-details/schedule-d
 import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
 import { ScheduleUpdateComponent } from './schedule/schedule-update/schedule-update.component';
 import { MainComponent } from './main/main.component';
+import { SignupComponent } from './security/signup/signup.component';
+import { LoginComponent } from './security/login/login.component';
 
 export const routes: Routes = [
 
     //Main
     { path: 'main', component: MainComponent},
     { path: '', pathMatch: 'full', redirectTo: 'main'},
+
+    //Auth
+    { path: 'signup', component: SignupComponent },
+    { path: 'login', component: LoginComponent },
 
     // Assignments
     { path: 'assignment/create', component: AssignmentCreateComponent},

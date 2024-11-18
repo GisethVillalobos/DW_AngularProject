@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Login</h2>
+    
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="loginDTO.email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="loginDTO.password" required />
+      </div>
+  
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+  

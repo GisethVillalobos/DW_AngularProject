@@ -1,4 +1,4 @@
-package com.example.TransmiApp.config;
+package com.example.TransmiApp.init;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

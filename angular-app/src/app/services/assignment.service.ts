@@ -27,19 +27,19 @@ export class AssignmentService {
 
   // Obtener ids
   getDriverIds(): Observable<number[]> {
-    return this.apiService.get(`${environment.SERVER_URL}/driver/ids`);
+    return this.apiService.get(`driver/ids`);
   }
 
   getBusIds(): Observable<number[]> {
-    return this.apiService.get(`${environment.SERVER_URL}/bus/ids`);
+    return this.apiService.get(`bus/ids`);
   }
 
   getRouteIds(): Observable<number[]> {
-    return this.apiService.get(`${environment.SERVER_URL}/route/ids`);
+    return this.apiService.get(`route/ids`);
   }
 
   getScheduleIds(): Observable<number[]> {
-    return this.apiService.get(`${environment.SERVER_URL}/schedule/ids`);
+    return this.apiService.get(`schedule/ids`);
   }
 
   // CRUD

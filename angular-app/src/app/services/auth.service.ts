@@ -24,7 +24,7 @@ export class AuthService {
     localStorage.removeItem('user');
 
     // Redirect to the login page
-    this.router.navigate(['/account/login']);
+    this.router.navigate(['/account']);
   }
 
   // Signup

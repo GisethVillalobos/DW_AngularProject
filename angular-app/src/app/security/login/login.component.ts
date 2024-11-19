@@ -28,12 +28,15 @@ export class LoginComponent {
       (response) => {
         localStorage.setItem('token', response.token);
         this.router.navigate(['/main']);
-        alert('Login successful!');
       },
       (error) => {
         this.errorMessage = 'Invalid credentials, please try again.';
       }
     );
+  }
+
+  register(): void {
+    this.router.navigate(['/account/signup']);
   }
 }
 

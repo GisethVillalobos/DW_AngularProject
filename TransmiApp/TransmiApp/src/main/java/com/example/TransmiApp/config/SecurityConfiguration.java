@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                 .requestMatchers(h2RequestMatcher).permitAll());
         http.headers(headers -> headers.frameOptions(t -> t.disable()));
 
+
         return http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
@@ -60,7 +61,6 @@ public class SecurityConfiguration {
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                         jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
     }
 
     @Bean

@@ -9,7 +9,7 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiUEFTU0VOR0VSIiwic3ViIjoid
 
 ###
 GET http://localhost:8080/api/driver/all
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiUEFTU0VOR0VSIiwic3ViIjoidGVzdHVzZXJAdHJhbnNtaS5jb20iLCJpYXQiOjE3MzE5NjQwMTYsImV4cCI6MTczMjAwMDAxNn0.mRUJ9CbIlTiZraCsOj4nYIwEL7b2snkO51DAqH7PEe1vuXSjkbwSl6x23GjOOsqK
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiQ09PUkRJIiwic3ViIjoidGVzdHVzZXJAY29vcmRpLnRyYW5zbWkuY29tIiwiaWF0IjoxNzMxOTgzNTI4LCJleHAiOjE3MzIwMTk1Mjh9.tyGk06ENq82agPSK1mhDRR_AA7-G9vQuKTQaPu54_7xHK5YIihsIycYPrGBMupLu
 
 ###
 GET http://localhost:8080/api/route/all
@@ -26,7 +26,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "testuser@admin.transmi.com",
+    "email": "testuser@coordi.transmi.com",
     "password": "password123"
 }
 
@@ -36,7 +36,7 @@ POST http://localhost:8080/auth/signup
 Content-Type: application/json
 
 {
-    "email": "testuser@admin.transmi.com",
+    "email": "testuser@coordi.transmi.com",
     "password": "password123",
     "firstName": "user",
     "lastName": "test"

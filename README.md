@@ -20,7 +20,7 @@ TransmiApp is an information system for TransMilenio. It includes basic CRUD ope
 ### **Backend Setup**
 1. Clone the repository:
    ```bash
-   git clone https://github.com/GisethVillalobos/TransmiApp.git
+   git clone https://github.com/GisethVillalobos/DW_AngularProject.git
    cd TransmiApp
    ```
 2. Navigate to the backend directory:
